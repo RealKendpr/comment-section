@@ -28,7 +28,7 @@ export function Replies() {
                     <span className="scoreNumber">{score}</span>
                     <button>-</button>
                   </div>
-                  {user.username.includes(currentUser) ? (
+                  {user.username === currentUser ? (
                     <div>
                       <button>Edit</button>
                       <button>Delete</button>
