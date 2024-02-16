@@ -1,16 +1,16 @@
 import dataJson from "./data.json";
+import { Scores } from "./score";
 
 export function Replies() {
-  let eachComments = dataJson.comments;
+  // let Comments = dataJson.comments;
   let currentUser = dataJson.currentUser.username;
 
   return (
     <>
       <div id="replies">
-        {eachComments.map((comment) => {
-          const { replies } = comment;
-          return replies.map((replly) => {
-            const { id, content, createdAt, score, replyingTo, user } = replly;
+        {dataJson.comments.map((comment) => {
+          return comment.replies.map((reply) => {
+            const { id, content, createdAt, replyingTo, user } = reply;
             return (
               <article key={id}>
                 <div>
@@ -19,15 +19,11 @@ export function Replies() {
                   <div>{createdAt}</div>
                 </div>
                 <p>
-                  {"@" + replyingTo + " "}
+                  <a href="#">{"@" + replyingTo}</a>
                   {content}
                 </p>
                 <div>
-                  <div className="score">
-                    <button>+</button>
-                    <span className="scoreNumber">{score}</span>
-                    <button>-</button>
-                  </div>
+                  <Scores {...reply}></Scores>
                   {user.username === currentUser ? (
                     <div>
                       <button>Edit</button>

@@ -1,5 +1,6 @@
 import dataJson from "./data.json";
 import { Replies } from "./replies";
+import { Scores } from "./score";
 
 export function Comments() {
   let eachComments = dataJson.comments;
@@ -7,7 +8,7 @@ export function Comments() {
   return (
     <>
       {eachComments.map((comment) => {
-        const { id, user, createdAt, content, score, replies } = comment;
+        const { id, user, createdAt, content, replies } = comment;
         return (
           <article key={id}>
             <div>
@@ -17,11 +18,7 @@ export function Comments() {
             </div>
             <p>{content}</p>
             <div>
-              <div className="score">
-                <button>+</button>
-                <span className="scoreNumber">{score}</span>
-                <button>-</button>
-              </div>
+              <Scores {...comment}></Scores>
               <button>Reply</button>
             </div>
             {replies.length > 0 && <Replies></Replies>}
