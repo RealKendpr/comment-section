@@ -1,12 +1,17 @@
 import { useState } from "react";
+import dataJson from "./data.json";
 
 export function Scores(props) {
   // const Reply = (props) => {
+  let currentUser = dataJson.currentUser.username;
+
   const [score, setCount] = useState(props.score);
   const [hasAdded, setHasAdded] = useState(false);
 
   const add = () => {
-    if (hasAdded === false) {
+    if (props.user.username === currentUser) {
+      return null;
+    } else if (hasAdded === false) {
       updateCount(1);
       setHasAdded(true);
     }
