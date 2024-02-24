@@ -7,37 +7,34 @@ export function Replies() {
 
   return (
     <>
-      <div id="replies">
-        {dataJson.comments.map((comment) => {
-          return comment.replies.map((reply) => {
-            const { id, content, createdAt, replyingTo, user } = reply;
-            return (
-              <article key={id}>
-                <div>
-                  <img src={user.image.png} alt="" />
-                  <a href="#">{user.username}</a>
-                  <div>{createdAt}</div>
-                </div>
-                <p>
-                  <a href="#">{"@" + replyingTo}</a>
-                  {content}
-                </p>
-                <div>
-                  <Scores {...reply}></Scores>
-                  {user.username === currentUser ? (
-                    <div>
-                      <button>Edit</button>
-                      <button>Delete</button>
-                    </div>
-                  ) : (
-                    <button>Reply</button>
-                  )}
-                </div>
-              </article>
-            );
-          });
-        })}
-      </div>
+      {dataJson.comments.map((comment) => {
+        return comment.replies.map((reply) => {
+          const { id, content, createdAt, replyingTo, user } = reply;
+          return (
+            <article key={id}>
+              <div>
+                <img src={user.image.png} alt="" />
+                <a href="#">{user.username}</a>
+                <div>{createdAt}</div>
+              </div>
+              <p>
+                <a href="#">{"@" + replyingTo}</a> &nbsp; {content}
+              </p>
+              <div>
+                <Scores {...reply}></Scores>
+                {user.username === currentUser ? (
+                  <div>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                  </div>
+                ) : (
+                  <button>Reply</button>
+                )}
+              </div>
+            </article>
+          );
+        });
+      })}
     </>
   );
 }
