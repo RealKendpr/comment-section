@@ -1,26 +1,53 @@
 import dataJson from "./data.json";
-import UserIcon from "./assets/images/avatars/image-juliusomo.png";
+// import UserIcon from "./assets/images/avatars/image-juliusomo.png";
 import { Replies } from "./replies";
 import { Scores } from "./score";
 import CommentForm from "./CommentForm";
-import { createComment as createCommentApi } from "./api";
-import { useState } from "react";
-// import { useEffect, useState } from "react";
+// import { createComment as createCommentApi } from "./api";
+// import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function Comments() {
-  const [backendComments, setBackendComment] = useState([]);
+  // let commentList = dataJson.comments;
 
-  let eachComments = dataJson.comments;
-  const addComment = (text, parentId) => {
-    console.log(text, parentId);
-    createCommentApi(text, parentId).then((comment) => {
-      setBackendComment([comment, ...backendComments]);
-    });
+  const currentUser = dataJson.currentUser;
+  const [commentList, addComment] = useState(dataJson.comments);
+  const [textArea, setTextArea] = useState("");
+
+  // useEffect(() => {
+  //   addComment;
+  // }, [dataJson.comments]);
+
+  const obj = {
+    id: 8888,
+    content: "fsfsffsf",
+    createdAt: "1 month ago",
+    score: 12,
+    user: {
+      image: {
+        png: "./src/components/assets/images/avatars/image-maxblagun.png",
+        webp: "./images/avatars/image-maxblagun.webp",
+      },
+      username: "hdjdj",
+    },
+    replies: [],
   };
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    // obj;
+
+    // commentList = [...commentList, obj];
+    addComment([...commentList, obj]);
+    console.log(commentList);
+    // console.log(addComment);
+    // console.log(textArea);
+  };
+  console.log(commentList);
 
   return (
     <>
-      {eachComments.map((comment) => {
+      {commentList.map((comment) => {
         const { id, user, createdAt, content, replies } = comment;
         return (
           <article key={id}>
@@ -41,11 +68,20 @@ export function Comments() {
         );
       })}
       <div className="userInputs">
-        <CommentForm
-          handleSubmit={addComment}
-          submitLabel="SEND"
-          userIcon={UserIcon}
-        ></CommentForm>
+        {/* <CommentForm
+          // {...commentList}
+          // handleSubmit={addComment}z
+          // submitLabel="SEND"
+          // userIcon={UserIcon}
+        ></CommentForm> */}
+
+        <form onSubmit={submitForm}>
+          <textarea
+            value={textArea}
+            onChange={(e) => setTextArea(e.target.value)}
+          ></textarea>
+          <button>Send</button>
+        </form>
       </div>
     </>
   );
