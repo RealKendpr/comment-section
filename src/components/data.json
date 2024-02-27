@@ -63,7 +63,20 @@
           }
         }
       ]
+    },
+    {
+      "id": 6,
+      "content": "fsfsffsf",
+      "createdAt": "1 month ago",
+      "score": 12,
+      "user": {
+        "image": {
+          "png": "./src/components/assets/images/avatars/image-maxblagun.png",
+          "webp": "./images/avatars/image-maxblagun.webp"
+        },
+        "username": "hdjdj"
+      },
+      "replies": []
     }
   ]
 }
-

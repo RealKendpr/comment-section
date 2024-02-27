@@ -19,8 +19,8 @@ export function Comments() {
   // }, [dataJson.comments]);
 
   const obj = {
-    id: 8888,
-    content: "fsfsffsf",
+    id: commentList.length + 20,
+    content: textArea,
     createdAt: "1 month ago",
     score: 12,
     user: {
@@ -43,7 +43,7 @@ export function Comments() {
     // console.log(addComment);
     // console.log(textArea);
   };
-  console.log(commentList);
+  // console.log(commentList);
 
   return (
     <>
