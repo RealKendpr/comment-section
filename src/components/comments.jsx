@@ -6,6 +6,7 @@ import CommentForm from "./CommentForm";
 // import { createComment as createCommentApi } from "./api";
 
 export function Comments() {
+  const currentUser = dataJson.currentUser;
   const [comments, setComment] = useState(dataJson.comments);
 
   return (
@@ -22,7 +23,14 @@ export function Comments() {
             <p>{content}</p>
             <div>
               <Scores {...comment}></Scores>
-              <button>Reply</button>
+              {user.username === currentUser.username ? (
+                <div>
+                  <button>Edit</button>
+                  <button>Delete</button>
+                </div>
+              ) : (
+                <button>Reply</button>
+              )}
             </div>
             <div className="replies">
               {replies.length > 0 && <Replies></Replies>}
