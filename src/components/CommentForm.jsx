@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+// import { Date } from "./functions";
 import dataJson from "./data.json";
 // import { createComment as createCommentApi } from "./api";
 
-function CommentForm({ comments, setComment }) {
+function CommentForm({ setComment }) {
   const currentUser = dataJson.currentUser;
   const [textArea, setTextArea] = useState("");
+  // const [currentDate, setCurrentDate] = useState(Date());
 
-  const comment = {
+  const createComment = {
     id: Math.random().toString(36).substring(2, 9),
     content: textArea,
-    createdAt: new Date().toISOString(),
+    createdAt: new Date().getDate(),
     score: 0,
     user: currentUser,
     replies: [],
@@ -17,10 +19,18 @@ function CommentForm({ comments, setComment }) {
 
   const textAreaDisabled = textArea.length === 0;
 
+  const commentsList = (createComment) => {
+    setComment((prevComment) => {
+      return [...prevComment, createComment];
+    });
+  };
+
   const submitForm = (e) => {
     e.preventDefault();
+
     if (textArea.length !== 0) {
-      setComment([...comments, comment]);
+      // setComment([...comments, createComment]);
+      commentsList(createComment);
       setTextArea("");
     }
   };
