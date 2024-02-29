@@ -57,7 +57,7 @@ export function Comments() {
         );
       })}
       <div className="userInputs">
-        <CommentForm setComment={setComment}></CommentForm>
+        <CommentForm setComment={setComment} comments={comments}></CommentForm>
       </div>
     </>
   );
