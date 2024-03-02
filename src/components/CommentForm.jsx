@@ -23,7 +23,7 @@ function CommentForm({ setComment, comments }) {
   return (
     <>
       <div>
-        <img src={currentUser.image.png} alt="" />
+        <img src={currentUser.image.png} alt="" />  
       </div>
       <form onSubmit={submitForm}>
         <textarea
