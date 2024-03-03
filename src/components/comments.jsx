@@ -21,33 +21,34 @@ export function Comments() {
         return (
           <article key={id}>
             <div>
-              <img src={user.image.png} alt="" />
-              <a href="#">{user.username}</a>
-              <div>{createdAt}</div>
-            </div>
-            <Scores {...comment}></Scores>
-            <div>
-              {user.username === currentUser.username ? (
-                <div>
-                  <EditComment
-                    comments={comments}
-                    setComment={setComment}
-                    id={id}
-                    content={content}
-                  ></EditComment>
-                  <DeleteBtn
-                    comment={comment}
-                    setDeleteComment={setDeleteComment}
-                    setShowConfirmation={setShowConfirmation}
-                  ></DeleteBtn>
+              <div className="comment">
+                <div className="comment-info">
+                  <img src={user.image.png} alt="" />
+                  <a href="#">{user.username}</a>
+                  <div>{createdAt}</div>
                 </div>
-              ) : (
-                <button>Reply</button>
-              )}
-              <p>{content}</p>
-            </div>
-            <div className="replies">
-              {replies.length > 0 && <Replies></Replies>}
+                <p>{content}</p>
+              </div>
+              <Scores {...comment}></Scores>
+              <div className="comment-operations">
+                {user.username === currentUser.username ? (
+                  <div>
+                    <EditComment
+                      comments={comments}
+                      setComment={setComment}
+                      id={id}
+                      content={content}
+                    ></EditComment>
+                    <DeleteBtn
+                      comment={comment}
+                      setDeleteComment={setDeleteComment}
+                      setShowConfirmation={setShowConfirmation}
+                    ></DeleteBtn>
+                  </div>
+                ) : (
+                  <button>Reply</button>
+                )}
+              </div>
             </div>
             <ConfirmDelete
               showConfirmation={
@@ -59,6 +60,11 @@ export function Comments() {
               comments={comments}
               setComment={setComment}
             ></ConfirmDelete>
+            <div className="replies">
+              {replies.length > 0 && (
+                <Replies currentUser={currentUser} replies={replies}></Replies>
+              )}
+            </div>
           </article>
         );
       })}

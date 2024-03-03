@@ -1,39 +1,33 @@
-import dataJson from "./data.json";
 import { Scores } from "./score";
 
-export function Replies() {
-  // let Comments = dataJson.comments;
-  let currentUser = dataJson.currentUser.username;
-
+export function Replies({ currentUser, replies }) {
   return (
     <>
-      {dataJson.comments.map((comment) => {
-        return comment.replies.map((reply) => {
-          const { id, content, createdAt, replyingTo, user } = reply;
-          return (
-            <article key={id}>
-              <div>
-                <img src={user.image.png} alt="" />
-                <a href="#">{user.username}</a>
-                <div>{createdAt}</div>
-              </div>
-              <p>
-                <a href="#">{"@" + replyingTo}</a> &nbsp; {content}
-              </p>
-              <div>
-                <Scores {...reply}></Scores>
-                {user.username === currentUser ? (
-                  <div>
-                    <button>Edit</button>
-                    <button>Delete</button>
-                  </div>
-                ) : (
-                  <button>Reply</button>
-                )}
-              </div>
-            </article>
-          );
-        });
+      {replies.map((reply) => {
+        const { id, content, createdAt, replyingTo, user } = reply;
+        return (
+          <article key={id}>
+            <div>
+              <img src={user.image.png} alt="" />
+              <a href="#">{user.username}</a>
+              <div>{createdAt}</div>
+            </div>
+            <p>
+              <a href="#">{"@" + replyingTo}</a> &nbsp; {content}
+            </p>
+            <div>
+              <Scores {...reply}></Scores>
+              {user.username === currentUser ? (
+                <div>
+                  <button>Edit</button>
+                  <button>Delete</button>
+                </div>
+              ) : (
+                <button>Reply</button>
+              )}
+            </div>
+          </article>
+        );
       })}
     </>
   );

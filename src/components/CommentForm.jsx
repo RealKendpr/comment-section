@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import dataJson from "./data.json";
 import { createComment } from "./api";
 // import { Date } from "./functions";
@@ -23,7 +23,7 @@ function CommentForm({ setComment, comments }) {
   return (
     <>
       <div>
-        <img src={currentUser.image.png} alt="" />  
+        <img src={currentUser.image.png} alt="" />
       </div>
       <form onSubmit={submitForm}>
         <textarea
