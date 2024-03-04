@@ -9,7 +9,7 @@ export default function CommentForm({ setComment, comments }) {
   // const [currentDate, setCurrentDate] = useState(Date());
 
   const textAreaDisabled = textArea.length === 0;
-  const newComment = createComment(textArea, currentUser);
+  const newComment = createComment(textArea);
 
   const submitForm = (e) => {
     e.preventDefault();
