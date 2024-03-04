@@ -53,6 +53,7 @@ export function Comments() {
                       // addReplyToComment={addReplyToComment}
                       comments={comments}
                       setComment={setComment}
+                      username={user.username}
                     ></ReplyForm>
                   </div>
                 )}

@@ -7,11 +7,11 @@ export const createComment = (textArea, currentUser) => ({
   replies: [],
 });
 
-export const createReply = (textArea, currentUser, replyingTo) => ({
+export const createReply = (textArea, currentUser, username) => ({
   id: Math.random().toString(36).substring(4, 11),
   content: textArea,
   createdAt: new Date().getDate(),
   score: 0,
-  // replyingTo: replyingTo,
+  replyingTo: username,
   user: currentUser,
 });
