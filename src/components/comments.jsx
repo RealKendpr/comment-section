@@ -5,6 +5,7 @@ import { Scores } from "./score";
 import CommentForm from "./CommentForm";
 import { ConfirmDelete, DeleteBtn } from "./delete";
 import { EditComment } from "./editComment";
+import { ReplyForm } from "./replyForm";
 // import { createComment as createCommentApi } from "./api";
 
 export function Comments() {
@@ -46,7 +47,14 @@ export function Comments() {
                     ></DeleteBtn>
                   </div>
                 ) : (
-                  <button>Reply</button>
+                  <div className="reply-input">
+                    <ReplyForm
+                      id={id}
+                      // addReplyToComment={addReplyToComment}
+                      comments={comments}
+                      setComment={setComment}
+                    ></ReplyForm>
+                  </div>
                 )}
               </div>
             </div>

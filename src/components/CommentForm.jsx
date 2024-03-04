@@ -3,7 +3,7 @@ import dataJson from "./data.json";
 import { createComment } from "./api";
 // import { Date } from "./functions";
 
-function CommentForm({ setComment, comments }) {
+export default function CommentForm({ setComment, comments }) {
   const currentUser = dataJson.currentUser;
   const [textArea, setTextArea] = useState("");
   // const [currentDate, setCurrentDate] = useState(Date());
@@ -35,8 +35,6 @@ function CommentForm({ setComment, comments }) {
     </>
   );
 }
-
-export default CommentForm;
 
 // const obj = [
 //   {
