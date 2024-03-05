@@ -31,26 +31,24 @@ export function Comments() {
                   <p>{content}</p>
                 </div>
                 <Scores {...comment}></Scores>
-                <div className="comment-operations">
-                  {user.username === currentUser.username && (
-                    <div>
-                      <EditComment
-                        comments={comments}
-                        setComment={setComment}
-                        id={id}
-                        content={content}
-                      ></EditComment>
-                      <DeleteBtn
-                        comment={comment}
-                        setDeleteComment={setDeleteComment}
-                        setShowConfirmation={setShowConfirmation}
-                      ></DeleteBtn>
-                    </div>
-                  )}
-                </div>
+                {user.username === currentUser.username && (
+                  <div className="comment-operations">
+                    <EditComment
+                      comments={comments}
+                      setComment={setComment}
+                      id={id}
+                      content={content}
+                    ></EditComment>
+                    <DeleteBtn
+                      comment={comment}
+                      setDeleteComment={setDeleteComment}
+                      setShowConfirmation={setShowConfirmation}
+                    ></DeleteBtn>
+                  </div>
+                )}
               </div>
               <Replies
-                username={user.username}
+                commentUsername={user.username}
                 currentUser={currentUser}
                 replies={replies}
               ></Replies>

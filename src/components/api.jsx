@@ -9,11 +9,11 @@ export const createComment = (textArea) => ({
   replies: [],
 });
 
-export const createReply = (textArea, username) => ({
+export const createReply = (textArea, commentUsername) => ({
   id: Math.random().toString(36).substring(4, 11),
   content: textArea,
   createdAt: new Date().getDate(),
   score: 0,
-  replyingTo: username,
+  replyingTo: commentUsername,
   user: dataJson.currentUser,
 });

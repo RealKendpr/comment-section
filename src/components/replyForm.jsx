@@ -2,13 +2,13 @@ import { useState } from "react";
 import dataJson from "./data.json";
 import { createReply } from "./api";
 
-export function ReplyForm({ username, reply, setReply }) {
+export function ReplyForm({ commentUsername, reply, setReply }) {
   const currentUser = dataJson.currentUser;
   const [textArea, setTextArea] = useState("");
 
-  const textAreaDisabled = textArea.length === 0;
+  const textAreaDisabled = textArea.length < 50;
   const [visibleForm, setVisibleForm] = useState(false);
-  const newReply = createReply(textArea, username);
+  const newReply = createReply(textArea, commentUsername);
 
   const toggleForm = () => {
     setVisibleForm(true);
@@ -16,7 +16,7 @@ export function ReplyForm({ username, reply, setReply }) {
   const submitForm = (e) => {
     e.preventDefault();
 
-    if (textArea.length > 49) {
+    if (textArea.length >= 50) {
       setReply([...reply, newReply]);
     }
     setTextArea("");
