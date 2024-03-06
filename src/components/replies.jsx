@@ -3,9 +3,22 @@ import { ReplyForm } from "./replyForm";
 import { Scores } from "./score";
 import { ReplyToReply } from "./replytoreply";
 
-export function Replies({ currentUser, replies, commentUsername }) {
+export function Replies({
+  currentUser,
+  replies,
+  commentUsername,
+  openTextAreaId,
+  setOpenTextAreaId,
+  handleOpenTextArea,
+}) {
   const [reply, setReply] = useState(replies);
-  const [activeFormId, setActiveFormId] = useState(null);
+  // const [activeFormId, setActiveFormId] = useState(null);
+
+  const [isReplyFormOpen, setReplyFormOpen] = useState(false);
+
+  const closeAllTextarea = () => {
+    setReplyFormOpen(false);
+  };
 
   return (
     <>
@@ -14,6 +27,12 @@ export function Replies({ currentUser, replies, commentUsername }) {
           commentUsername={commentUsername}
           reply={reply}
           setReply={setReply}
+          // isReplyFormOpen={isReplyFormOpen}
+          // setReplyFormOpen={setReplyFormOpen}
+          // closeAllTextarea={closeAllTextarea}
+          // handleOpenTextArea={handleOpenTextArea}
+          openTextAreaId={openTextAreaId}
+          setOpenTextAreaId={setOpenTextAreaId}
         ></ReplyForm>
       )}
       {reply.length !== 0 && (
@@ -45,9 +64,13 @@ export function Replies({ currentUser, replies, commentUsername }) {
                   commentUsername={user.username}
                   reply={reply}
                   setReply={setReply}
-                  id={id}
-                  setActiveFormId={setActiveFormId}
-                  activeFormId={activeFormId}
+                  replyId={id}
+                  // setActiveFormId={setActiveFormId}
+                  // activeFormId={activeFormId}
+                  openTextAreaId={openTextAreaId}
+                  handleOpenTextArea={handleOpenTextArea}
+                  setOpenTextAreaId={setOpenTextAreaId}
+                  // closeAllTextarea={closeAllTextarea}
                 ></ReplyToReply>
               </div>
             );

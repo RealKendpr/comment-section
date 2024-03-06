@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { createReply } from "./api";
 import dataJson from "./data.json";
 
@@ -6,36 +6,44 @@ export function ReplyToReply({
   commentUsername,
   reply,
   setReply,
-  id,
-  activeFormId,
-  setActiveFormId,
+  replyId,
+  // activeFormId,
+  // setActiveFormId,
+  openTextAreaId,
+  handleOpenTextArea,
+  setOpenTextAreaId,
+  // closeAllTextarea,
 }) {
   const currentUser = dataJson.currentUser;
   const [textArea, setTextArea] = useState("");
+
+  // const [isTextAreaOpen, setIsTextAreaOpen] = useState(false);
+  const isTextAreaOpen = openTextAreaId === replyId;
+
+  const handleOpenForm = () => {
+    if (openTextAreaId === replyId) {
+      setOpenTextAreaId(null);
+    } else {
+      setOpenTextAreaId(replyId);
+    }
+    // setIsTextAreaOpen(true);
+    // closeAllTextarea();
+  };
 
   const textAreaDisabled = textArea.length === 0;
   const newReply = createReply(textArea, commentUsername);
 
   const submitForm = (e) => {
     e.preventDefault();
-    if (textArea.length !== 0) {
-      setReply([...reply, newReply]);
-    }
-    setActiveFormId(null);
+    textArea.length !== 0 ? setReply([...reply, newReply]) : null;
+    // setActiveFormId(null);
     setTextArea("");
   };
 
   return (
     <>
-      {activeFormId !== id ? (
-        <button
-          onClick={() => {
-            setActiveFormId(activeFormId === id ? null : id);
-          }}
-        >
-          REPLY
-        </button>
-      ) : (
+      {/* {activeFormId === id ? ( */}
+      {isTextAreaOpen && (
         <div className="reply-input">
           <div>
             <img src={currentUser.image.png} alt="" />
@@ -49,6 +57,17 @@ export function ReplyToReply({
           </form>
         </div>
       )}
+      {/* // ) : ( */}
+      <button
+        // onClick={() => {
+        //   // setActiveFormId(activeFormId === id ? null : id);
+        //   handleOpenTextArea(replyId);
+        // }}
+        onClick={handleOpenForm}
+      >
+        REPLY
+      </button>
+      {/* // )} */}
     </>
   );
 }
