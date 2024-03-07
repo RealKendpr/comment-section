@@ -7,7 +7,6 @@ export function ReplyToReply({
   reply,
   setReply,
   replyId,
-
   openForm,
   setOPenForm,
   commentId,
@@ -30,33 +29,35 @@ export function ReplyToReply({
     e.preventDefault();
     textArea.length !== 0 ? setReply([...reply, newReply]) : null;
     setTextArea("");
+    setOPenForm({ commentId: null, replyId: null, type: null });
   };
 
   return (
     <>
-       <button
-        onClick={() =>
-          setOPenForm({ commentId, replyId, type: "ReplyToReply" })
-        }
-      >
-        REPLY
-      </button>
       {openForm.commentId === commentId &&
-        openForm.replyId === replyId &&
-        openForm.type === "ReplyToReply" && (
-          <div className="reply-input">
-            <div>
-              <img src={currentUser.image.png} alt="" />
-            </div>
-            <form onSubmit={submitForm}>
-              <textarea
-                value={textArea}
-                onChange={(e) => setTextArea(e.target.value)}
-              ></textarea>
-              <button disabled={textAreaDisabled}>Reply</button>
-            </form>
+      openForm.replyId === replyId &&
+      openForm.type === "ReplyToReply" ? (
+        <div className="reply-input">
+          <div>
+            <img src={currentUser.image.png} alt="" />
           </div>
-        )}
+          <form onSubmit={submitForm}>
+            <textarea
+              value={textArea}
+              onChange={(e) => setTextArea(e.target.value)}
+            ></textarea>
+            <button disabled={textAreaDisabled}>Reply</button>
+          </form>
+        </div>
+      ) : (
+        <button
+          onClick={() =>
+            setOPenForm({ commentId, replyId, type: "ReplyToReply" })
+          }
+        >
+          REPLY
+        </button>
+      )}
     </>
   );
 }

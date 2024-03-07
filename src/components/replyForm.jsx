@@ -27,18 +27,14 @@ export function ReplyForm({
   const submitForm = (e) => {
     e.preventDefault();
 
-    if (textArea.length >= 50) {
-      setReply([...reply, newReply]);
-    }
+    textArea.length >= 50 ? setReply([...reply, newReply]) : null;
     setTextArea("");
+    setOPenForm({ commentId: null, type: null });
   };
 
   return (
     <>
-      <button onClick={() => setOPenForm({ commentId, type: "ReplyForm" })}>
-        REPLY
-      </button>
-      {openForm.commentId === commentId && openForm.type === "ReplyForm" && (
+      {openForm.commentId === commentId && openForm.type === "ReplyForm" ? (
         <div className="reply-input">
           <div>
             <img src={currentUser.image.png} alt="" />
@@ -51,6 +47,10 @@ export function ReplyForm({
             <button disabled={textAreaDisabled}>REPLY</button>
           </form>
         </div>
+      ) : (
+        <button onClick={() => setOPenForm({ commentId, type: "ReplyForm" })}>
+          REPLY
+        </button>
       )}
     </>
   );
