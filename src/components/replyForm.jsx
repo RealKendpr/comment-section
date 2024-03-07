@@ -2,17 +2,28 @@ import { useState } from "react";
 import dataJson from "./data.json";
 import { createReply } from "./api";
 
-export function ReplyForm({ commentUsername, reply, setReply }) {
+export function ReplyForm({
+  commentUsername,
+  reply,
+  setReply,
+  openForm,
+  setOPenForm,
+  commentId,
+}) {
   const currentUser = dataJson.currentUser;
   const [textArea, setTextArea] = useState("");
 
   const textAreaDisabled = textArea.length < 50;
-  const [visibleForm, setVisibleForm] = useState(false);
   const newReply = createReply(textArea, commentUsername);
 
-  const toggleForm = () => {
-    setVisibleForm(true);
+  const handleOpenForm = () => {
+    if (openTextAreaId === "commentForm") {
+      setOpenTextAreaId(null);
+    } else {
+      setOpenTextAreaId("commentForm");
+    }
   };
+
   const submitForm = (e) => {
     e.preventDefault();
 
@@ -20,14 +31,14 @@ export function ReplyForm({ commentUsername, reply, setReply }) {
       setReply([...reply, newReply]);
     }
     setTextArea("");
-    setVisibleForm(false);
   };
 
   return (
     <>
-      {visibleForm === false ? (
-        <button onClick={toggleForm}>REPLY</button>
-      ) : (
+      <button onClick={() => setOPenForm({ commentId, type: "ReplyForm" })}>
+        REPLY
+      </button>
+      {openForm.commentId === commentId && openForm.type === "ReplyForm" && (
         <div className="reply-input">
           <div>
             <img src={currentUser.image.png} alt="" />

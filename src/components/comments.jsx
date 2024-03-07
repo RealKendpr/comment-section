@@ -14,15 +14,11 @@ export function Comments() {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [deleteComment, setDeleteComment] = useState(null);
 
-  const [openTextAreaId, setOpenTextAreaId] = useState(null);
-
-  const handleOpenTextArea = (id) => {
-    // if (openTextAreaId !== id) {
-    //   setOpenTextAreaId(id);
-    // } else {
-    //   setOpenTextAreaId(null);
-    // }
-  };
+  const [openForm, setOPenForm] = useState({
+    commentId: null,
+    replyId: null,
+    type: null,
+  });
 
   return (
     <>
@@ -61,10 +57,9 @@ export function Comments() {
                 commentUsername={user.username}
                 currentUser={currentUser}
                 replies={replies}
-                openTextAreaId={openTextAreaId}
-                setOpenTextAreaId={setOpenTextAreaId}
-                handleOpenTextArea={handleOpenTextArea}
-                // onClose={handleOpenTextArea(id)}
+                commentId={id}
+                openForm={openForm}
+                setOPenForm={setOPenForm}
               ></Replies>
             </article>
             <ConfirmDelete

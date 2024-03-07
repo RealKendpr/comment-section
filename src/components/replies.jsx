@@ -7,18 +7,12 @@ export function Replies({
   currentUser,
   replies,
   commentUsername,
-  openTextAreaId,
-  setOpenTextAreaId,
-  handleOpenTextArea,
+
+  commentId,
+  openForm,
+  setOPenForm,
 }) {
   const [reply, setReply] = useState(replies);
-  // const [activeFormId, setActiveFormId] = useState(null);
-
-  const [isReplyFormOpen, setReplyFormOpen] = useState(false);
-
-  const closeAllTextarea = () => {
-    setReplyFormOpen(false);
-  };
 
   return (
     <>
@@ -27,12 +21,9 @@ export function Replies({
           commentUsername={commentUsername}
           reply={reply}
           setReply={setReply}
-          // isReplyFormOpen={isReplyFormOpen}
-          // setReplyFormOpen={setReplyFormOpen}
-          // closeAllTextarea={closeAllTextarea}
-          // handleOpenTextArea={handleOpenTextArea}
-          openTextAreaId={openTextAreaId}
-          setOpenTextAreaId={setOpenTextAreaId}
+          openForm={openForm}
+          setOPenForm={setOPenForm}
+          commentId={commentId}
         ></ReplyForm>
       )}
       {reply.length !== 0 && (
@@ -65,12 +56,9 @@ export function Replies({
                   reply={reply}
                   setReply={setReply}
                   replyId={id}
-                  // setActiveFormId={setActiveFormId}
-                  // activeFormId={activeFormId}
-                  openTextAreaId={openTextAreaId}
-                  handleOpenTextArea={handleOpenTextArea}
-                  setOpenTextAreaId={setOpenTextAreaId}
-                  // closeAllTextarea={closeAllTextarea}
+                  openForm={openForm}
+                  setOPenForm={setOPenForm}
+                  commentId={commentId}
                 ></ReplyToReply>
               </div>
             );
