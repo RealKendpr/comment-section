@@ -51,11 +51,14 @@ export function EditComment({
         <div>
           <textarea
             value={editedComment}
-            onChange={() => {
+            onChange={(e) => {
               setEditedComment(e.target.value);
               setTextArea(e.target.value);
             }}
-            onBlur={() => setOPenForm({ commentId: null, type: null })}
+            onBlur={() =>
+              textArea.length === 0 &&
+              setOPenForm({ commentId: null, type: null })
+            }
             ref={textareaFocus}
           ></textarea>
           <button onClick={handleUpdate} disabled={textAreaDisabled}>

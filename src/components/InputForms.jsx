@@ -62,7 +62,10 @@ export function InputForm({
             <textarea
               value={textArea}
               onChange={(e) => setTextArea(e.target.value)}
-              onBlur={() => setOPenForm({ commentId: null, type: null })}
+              onBlur={() =>
+                textArea.length === 0 &&
+                setOPenForm({ commentId: null, type: null })
+              }
             ></textarea>
             <button disabled={textAreaDisabled}>REPLY</button>
           </form>
