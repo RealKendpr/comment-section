@@ -2,9 +2,9 @@ import { useState } from "react";
 import dataJson from "./data.json";
 import { Replies } from "./replies";
 import { Scores } from "./score";
-import CommentForm from "./CommentForm";
 import { ConfirmDelete, DeleteBtn } from "./delete";
 import { EditComment } from "./editComment";
+import { InputForm } from "./InputForms";
 // import { createComment as createCommentApi } from "./api";
 
 export function Comments() {
@@ -76,7 +76,13 @@ export function Comments() {
         );
       })}
       <div className="userInputs">
-        <CommentForm setComment={setComment} comments={comments}></CommentForm>
+        <InputForm
+          comments={comments}
+          setComment={setComment}
+          openForm={openForm}
+          setOPenForm={setOPenForm}
+          type="CommentForm"
+        ></InputForm>
       </div>
     </>
   );

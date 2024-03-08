@@ -1,11 +1,15 @@
 import { useState } from "react";
-import { createReply } from "./api";
+import { createReply, createComment } from "./api";
 import dataJson from "./data.json";
 
-export function ReplyForm({
+export function InputForm({
   commentUsername,
   reply,
   setReply,
+
+  comments,
+  setComment,
+
   openForm,
   setOPenForm,
   commentId,
@@ -17,21 +21,40 @@ export function ReplyForm({
 
   const textAreaDisabled = textArea.length < 50;
   const newReply = createReply(textArea, commentUsername);
+  const newComment = createComment(textArea);
 
   const submitForm = (e) => {
     e.preventDefault();
-    textArea.length >= 50 ? setReply([...reply, newReply]) : null;
+    textArea.length >= 50
+      ? isCommentForm
+        ? setComment([...comments, newComment])
+        : setReply([...reply, newReply])
+      : null;
     setTextArea("");
     setOPenForm({ commentId: null, type: null });
   };
 
   const isReplyToReply = type === "ReplyToReply";
+  const isCommentForm = type === "CommentForm";
 
   return (
     <>
-      {openForm.commentId === commentId &&
-      openForm.replyId === replyId &&
-      openForm.type === type ? (
+      {isCommentForm ? (
+        <>
+          <div>
+            <img src={currentUser.image.png} alt="" />
+          </div>
+          <form onSubmit={submitForm}>
+            <textarea
+              value={textArea}
+              onChange={(e) => setTextArea(e.target.value)}
+            ></textarea>
+            <button disabled={textAreaDisabled}>Send</button>
+          </form>
+        </>
+      ) : openForm.commentId === commentId &&
+        openForm.replyId === replyId &&
+        openForm.type === type ? (
         <div className={isReplyToReply ? "ReplyToReply" : "ReplyToComment"}>
           <div>
             <img src={currentUser.image.png} alt="" />
