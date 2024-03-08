@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { ReplyForm } from "./replyForm";
 import { Scores } from "./score";
-import { ReplyToReply } from "./replytoreply";
 
 export function Replies({
   currentUser,
@@ -23,6 +22,7 @@ export function Replies({
           openForm={openForm}
           setOPenForm={setOPenForm}
           commentId={commentId}
+          type="ReplyToComment"
         ></ReplyForm>
       )}
       {reply.length !== 0 && (
@@ -50,7 +50,7 @@ export function Replies({
                     )}
                   </div>
                 </article>
-                <ReplyToReply
+                <ReplyForm
                   commentUsername={user.username}
                   reply={reply}
                   setReply={setReply}
@@ -58,7 +58,8 @@ export function Replies({
                   openForm={openForm}
                   setOPenForm={setOPenForm}
                   commentId={commentId}
-                ></ReplyToReply>
+                  type="ReplyToReply"
+                ></ReplyForm>
               </div>
             );
           })}

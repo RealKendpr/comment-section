@@ -1,6 +1,6 @@
 import { useState } from "react";
-import dataJson from "./data.json";
 import { createReply } from "./api";
+import dataJson from "./data.json";
 
 export function ReplyForm({
   commentUsername,
@@ -9,6 +9,8 @@ export function ReplyForm({
   openForm,
   setOPenForm,
   commentId,
+  replyId,
+  type,
 }) {
   const currentUser = dataJson.currentUser;
   const [textArea, setTextArea] = useState("");
@@ -16,26 +18,21 @@ export function ReplyForm({
   const textAreaDisabled = textArea.length < 50;
   const newReply = createReply(textArea, commentUsername);
 
-  const handleOpenForm = () => {
-    if (openTextAreaId === "commentForm") {
-      setOpenTextAreaId(null);
-    } else {
-      setOpenTextAreaId("commentForm");
-    }
-  };
-
   const submitForm = (e) => {
     e.preventDefault();
-
     textArea.length >= 50 ? setReply([...reply, newReply]) : null;
     setTextArea("");
     setOPenForm({ commentId: null, type: null });
   };
 
+  const isReplyToReply = type === "ReplyToReply";
+
   return (
     <>
-      {openForm.commentId === commentId && openForm.type === "ReplyForm" ? (
-        <div className="reply-input">
+      {openForm.commentId === commentId &&
+      openForm.replyId === replyId &&
+      openForm.type === type ? (
+        <div className={isReplyToReply ? "ReplyToReply" : "ReplyToComment"}>
           <div>
             <img src={currentUser.image.png} alt="" />
           </div>
@@ -48,7 +45,7 @@ export function ReplyForm({
           </form>
         </div>
       ) : (
-        <button onClick={() => setOPenForm({ commentId, type: "ReplyForm" })}>
+        <button onClick={() => setOPenForm({ commentId, replyId, type })}>
           REPLY
         </button>
       )}
