@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { InputForm } from "./InputForms";
 import { Scores } from "./score";
+import { EditComment } from "./editComment";
+import { DeleteBtn, ConfirmDelete } from "./delete";
 
 export function Replies({
   currentUser,
@@ -11,6 +13,8 @@ export function Replies({
   setOPenForm,
 }) {
   const [reply, setReply] = useState(replies);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [deleteComment, setDeleteComment] = useState(null);
 
   return (
     <>
@@ -42,12 +46,24 @@ export function Replies({
                   </p>
                   <div>
                     <Scores {...replyContents}></Scores>
-                    {user.username === currentUser && (
-                      <div>
-                        <button>Edit</button>
-                        <button>Delete</button>
+                    {user.username === currentUser.username ? (
+                      <div className="comment-operations">
+                        <EditComment
+                          comments={reply}
+                          setComment={setReply}
+                          id={id}
+                          content={content}
+                          openForm={openForm}
+                          setOPenForm={setOPenForm}
+                          type="EditForm"
+                        ></EditComment>
+                        <DeleteBtn
+                          comment={replyContents}
+                          setDeleteComment={setDeleteComment}
+                          setShowConfirmation={setShowConfirmation}
+                        ></DeleteBtn>
                       </div>
-                    )}
+                    ) : null}
                   </div>
                 </article>
                 <InputForm
@@ -60,6 +76,16 @@ export function Replies({
                   commentId={commentId}
                   type="ReplyToReply"
                 ></InputForm>
+                <ConfirmDelete
+                  showConfirmation={
+                    showConfirmation && replyContents.id === deleteComment
+                  }
+                  setDeleteComment={setDeleteComment}
+                  deleteComment={deleteComment}
+                  setShowConfirmation={setShowConfirmation}
+                  comments={reply}
+                  setComment={setReply}
+                ></ConfirmDelete>
               </div>
             );
           })}

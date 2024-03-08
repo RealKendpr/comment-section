@@ -6,10 +6,8 @@ export function InputForm({
   commentUsername,
   reply,
   setReply,
-
   comments,
   setComment,
-
   openForm,
   setOPenForm,
   commentId,
@@ -19,13 +17,13 @@ export function InputForm({
   const currentUser = dataJson.currentUser;
   const [textArea, setTextArea] = useState("");
 
-  const textAreaDisabled = textArea.length < 50;
+  const textAreaDisabled = textArea.length < 40;
   const newReply = createReply(textArea, commentUsername);
   const newComment = createComment(textArea);
 
   const submitForm = (e) => {
     e.preventDefault();
-    textArea.length >= 50
+    textArea.length >= 40
       ? isCommentForm
         ? setComment([...comments, newComment])
         : setReply([...reply, newReply])
@@ -48,6 +46,7 @@ export function InputForm({
             <textarea
               value={textArea}
               onChange={(e) => setTextArea(e.target.value)}
+              onFocus={() => setOPenForm({ commentId: null, type: null })}
             ></textarea>
             <button disabled={textAreaDisabled}>Send</button>
           </form>
@@ -63,6 +62,7 @@ export function InputForm({
             <textarea
               value={textArea}
               onChange={(e) => setTextArea(e.target.value)}
+              onBlur={() => setOPenForm({ commentId: null, type: null })}
             ></textarea>
             <button disabled={textAreaDisabled}>REPLY</button>
           </form>

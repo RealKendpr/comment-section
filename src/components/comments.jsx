@@ -44,6 +44,9 @@ export function Comments() {
                       setComment={setComment}
                       id={id}
                       content={content}
+                      openForm={openForm}
+                      setOPenForm={setOPenForm}
+                      type="EditForm"
                     ></EditComment>
                     <DeleteBtn
                       comment={comment}
