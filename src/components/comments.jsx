@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dataJson from "./data.json";
 import { Replies } from "./replies";
 import { Scores } from "./score";
@@ -9,7 +9,15 @@ import { InputForm } from "./InputForms";
 
 export function Comments() {
   const currentUser = dataJson.currentUser;
-  const [comments, setComment] = useState(dataJson.comments);
+  const [comments, setComment] = useState(() => {
+    const localValue = localStorage.getItem("COMMENTS");
+    localValue === null && [];
+    return localValue ? JSON.parse(localValue) : dataJson.comments;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("COMMENTS", JSON.stringify(comments));
+  }, [comments]);
 
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [deleteComment, setDeleteComment] = useState(null);
@@ -60,6 +68,8 @@ export function Comments() {
                 commentUsername={user.username}
                 currentUser={currentUser}
                 replies={replies}
+                comments={comments}
+                setComment={setComment}
                 commentId={id}
                 openForm={openForm}
                 setOPenForm={setOPenForm}

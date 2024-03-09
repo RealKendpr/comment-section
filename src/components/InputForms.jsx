@@ -4,8 +4,6 @@ import dataJson from "./data.json";
 
 export function InputForm({
   commentUsername,
-  reply,
-  setReply,
   comments,
   setComment,
   openForm,
@@ -21,12 +19,21 @@ export function InputForm({
   const newReply = createReply(textArea, commentUsername);
   const newComment = createComment(textArea);
 
+  const updatedReplies = comments.map((comment) => {
+    return comment.id === commentId
+      ? {
+          ...comment,
+          replies: [...comment.replies, newReply],
+        }
+      : comment;
+  });
+
   const submitForm = (e) => {
     e.preventDefault();
     textArea.length >= 40
       ? isCommentForm
         ? setComment([...comments, newComment])
-        : setReply([...reply, newReply])
+        : setComment(updatedReplies)
       : null;
     setTextArea("");
     setOPenForm({ commentId: null, type: null });

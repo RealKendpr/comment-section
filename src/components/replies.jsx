@@ -11,6 +11,8 @@ export function Replies({
   commentId,
   openForm,
   setOPenForm,
+  comments,
+  setComment,
 }) {
   const [reply, setReply] = useState(replies);
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -21,17 +23,17 @@ export function Replies({
       {commentUsername !== currentUser.username && (
         <InputForm
           commentUsername={commentUsername}
-          reply={reply}
-          setReply={setReply}
+          comments={comments}
+          setComment={setComment}
           openForm={openForm}
           setOPenForm={setOPenForm}
           commentId={commentId}
           type="ReplyToComment"
         ></InputForm>
       )}
-      {reply.length !== 0 && (
+      {replies.length !== 0 && (
         <div className="replies">
-          {reply.map((replyContents) => {
+          {replies.map((replyContents) => {
             const { id, content, createdAt, replyingTo, user } = replyContents;
             return (
               <div key={id}>
@@ -68,8 +70,8 @@ export function Replies({
                 </article>
                 <InputForm
                   commentUsername={user.username}
-                  reply={reply}
-                  setReply={setReply}
+                  comments={comments}
+                  setComment={setComment}
                   replyId={id}
                   openForm={openForm}
                   setOPenForm={setOPenForm}
