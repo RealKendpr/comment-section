@@ -1,42 +1,54 @@
 import { useEffect, useState } from "react";
 import dataJson from "./data.json";
 
-export function Scores({ comments, setComment, score, commentId, username }) {
-  let currentUser = dataJson.currentUser;
+export function Scores({
+  comments,
+  setComment,
+  score,
+  commentId,
+  replyId,
+  username,
+  type,
+}) {
   const [hasAdded, setHasAdded] = useState(false);
+  const isCurrentUser = dataJson.currentUser.username === username;
+  const isReply = type === "Reply";
 
   useEffect(() => {
-    const boolean = localStorage.getItem("hasAdded for " + commentId);
+    const boolean = localStorage.getItem(
+      "hasAdded for " + (isReply ? replyId : commentId)
+    );
     boolean ? setHasAdded(JSON.parse(boolean)) : null;
   }, [hasAdded]);
 
   const add = () => {
-    username === currentUser.username
-      ? null
-      : hasAdded
-      ? null
-      : handleUpdate(1, true);
+    isCurrentUser ? null : hasAdded ? null : handleUpdate(1, true);
   };
 
   const minus = () => {
-    username === currentUser.username
-      ? null
-      : hasAdded
-      ? handleUpdate(-1, false)
-      : null;
+    isCurrentUser ? null : hasAdded ? handleUpdate(-1, false) : null;
   };
 
   const handleUpdate = (total, handleHasAdded) => {
-    const updateCommentScore = comments.map((comment) =>
-      comment.id === commentId
-        ? { ...comment, score: comment.score + total }
-        : comment
+    const updateCommentScore = comments.map((c) =>
+      c.id === commentId ? { ...c, score: c.score + total } : c
     );
 
-    setComment(updateCommentScore);
+    const updateReplyScore = comments.map((c) =>
+      c.id === commentId
+        ? {
+            ...c,
+            replies: c.replies.map((r) =>
+              r.id === replyId ? { ...r, score: r.score + total } : r
+            ),
+          }
+        : c
+    );
+
+    isReply ? setComment(updateReplyScore) : setComment(updateCommentScore);
     setHasAdded(handleHasAdded);
     localStorage.setItem(
-      "hasAdded for " + commentId,
+      "hasAdded for " + (isReply ? replyId : commentId),
       JSON.stringify(handleHasAdded)
     );
   };

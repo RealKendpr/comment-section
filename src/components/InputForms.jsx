@@ -39,7 +39,6 @@ export function InputForm({
     setOPenForm({ commentId: null, type: null });
   };
 
-  const isReplyToReply = type === "ReplyToReply";
   const isCommentForm = type === "CommentForm";
 
   return (
@@ -61,7 +60,7 @@ export function InputForm({
       ) : openForm.commentId === commentId &&
         openForm.replyId === replyId &&
         openForm.type === type ? (
-        <div className={isReplyToReply ? "ReplyToReply" : "ReplyToComment"}>
+        <div className={isCommentForm ? "ReplyToComment" : "ReplyToReply"}>
           <div>
             <img src={currentUser.image.png} alt="" />
           </div>

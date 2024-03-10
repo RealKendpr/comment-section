@@ -31,8 +31,8 @@ export function Replies({
       )}
       {replies.length !== 0 && (
         <div className="replies">
-          {replies.map((replyContents) => {
-            const { id, content, createdAt, replyingTo, user } = replyContents;
+          {replies.map((eachReply) => {
+            const { id, content, createdAt, replyingTo, user } = eachReply;
             return (
               <div key={id}>
                 <article key={id}>
@@ -45,7 +45,15 @@ export function Replies({
                     <a href="#">{"@" + replyingTo}</a> &nbsp; {content}
                   </p>
                   <div>
-                    <Scores {...replyContents}></Scores>
+                    <Scores
+                      comments={comments}
+                      setComment={setComment}
+                      score={eachReply.score}
+                      commentId={commentId}
+                      replyId={id}
+                      username={user.username}
+                      type="Reply"
+                    ></Scores>
                     {user.username === currentUser.username ? (
                       <div className="comment-operations">
                         <EditComment
