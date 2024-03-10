@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import dataJson from "./data.json";
 import { Replies } from "./replies";
 import { Scores } from "./score";
-import { ConfirmDelete, DeleteBtn } from "./delete";
+import { Delete } from "./delete";
 import { EditComment } from "./editComment";
 import { InputForm } from "./InputForms";
 // import { createComment as createCommentApi } from "./api";
@@ -18,9 +18,6 @@ export function Comments() {
   useEffect(() => {
     localStorage.setItem("COMMENTS", JSON.stringify(comments));
   }, [comments]);
-
-  const [showConfirmation, setShowConfirmation] = useState(false);
-  const [deleteComment, setDeleteComment] = useState(null);
 
   const [openForm, setOPenForm] = useState({
     commentId: null,
@@ -44,7 +41,11 @@ export function Comments() {
                   </div>
                   <p>{content}</p>
                 </div>
-                <Scores {...comment}></Scores>
+                <Scores
+                  comments={comments}
+                  setComment={setComment}
+                  score={comment.score}
+                ></Scores>
                 {user.username === currentUser.username && (
                   <div className="comment-operations">
                     <EditComment
@@ -56,35 +57,26 @@ export function Comments() {
                       setOPenForm={setOPenForm}
                       type="EditForm"
                     ></EditComment>
-                    <DeleteBtn
-                      comment={comment}
-                      setDeleteComment={setDeleteComment}
-                      setShowConfirmation={setShowConfirmation}
-                    ></DeleteBtn>
+                    <Delete
+                      comments={comments}
+                      setComment={setComment}
+                      commentId={id}
+                      username={user.username}
+                    ></Delete>
                   </div>
                 )}
               </div>
-              <Replies
-                commentUsername={user.username}
-                currentUser={currentUser}
-                replies={replies}
-                comments={comments}
-                setComment={setComment}
-                commentId={id}
-                openForm={openForm}
-                setOPenForm={setOPenForm}
-              ></Replies>
             </article>
-            <ConfirmDelete
-              showConfirmation={
-                showConfirmation && comment.id === deleteComment
-              }
-              setDeleteComment={setDeleteComment}
-              deleteComment={deleteComment}
-              setShowConfirmation={setShowConfirmation}
+            <Replies
+              commentUsername={user.username}
+              currentUser={currentUser}
+              replies={replies}
               comments={comments}
               setComment={setComment}
-            ></ConfirmDelete>
+              commentId={id}
+              openForm={openForm}
+              setOPenForm={setOPenForm}
+            ></Replies>
           </div>
         );
       })}

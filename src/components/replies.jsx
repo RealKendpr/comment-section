@@ -2,7 +2,7 @@ import { useState } from "react";
 import { InputForm } from "./InputForms";
 import { Scores } from "./score";
 import { EditComment } from "./editComment";
-import { DeleteBtn, ConfirmDelete } from "./delete";
+import { Delete } from "./delete";
 
 export function Replies({
   currentUser,
@@ -15,8 +15,6 @@ export function Replies({
   setComment,
 }) {
   const [reply, setReply] = useState(replies);
-  const [showConfirmation, setShowConfirmation] = useState(false);
-  const [deleteComment, setDeleteComment] = useState(null);
 
   return (
     <>
@@ -59,11 +57,14 @@ export function Replies({
                           setOPenForm={setOPenForm}
                           type="EditForm"
                         ></EditComment>
-                        <DeleteBtn
-                          comment={replyContents}
-                          setDeleteComment={setDeleteComment}
-                          setShowConfirmation={setShowConfirmation}
-                        ></DeleteBtn>
+                        <Delete
+                          comments={comments}
+                          setComment={setComment}
+                          commentId={commentId}
+                          replyId={id}
+                          username={user.username}
+                          type="Reply"
+                        ></Delete>
                       </div>
                     ) : null}
                   </div>
@@ -78,16 +79,6 @@ export function Replies({
                   commentId={commentId}
                   type="ReplyToReply"
                 ></InputForm>
-                <ConfirmDelete
-                  showConfirmation={
-                    showConfirmation && replyContents.id === deleteComment
-                  }
-                  setDeleteComment={setDeleteComment}
-                  deleteComment={deleteComment}
-                  setShowConfirmation={setShowConfirmation}
-                  comments={reply}
-                  setComment={setReply}
-                ></ConfirmDelete>
               </div>
             );
           })}

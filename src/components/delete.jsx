@@ -1,48 +1,53 @@
+import { useState } from "react";
 import dataJson from "./data.json";
 const currentUser = dataJson.currentUser;
 
-export function DeleteBtn({ comment, setDeleteComment, setShowConfirmation }) {
-  const handleDelete = () => {
-    if (comment.user.username === currentUser.username) {
-      setDeleteComment(comment.id);
-    }
-    setShowConfirmation(true);
-  };
-
-  return <button onClick={handleDelete}>Delete</button>;
-}
-
-export function ConfirmDelete({
-  showConfirmation,
-  setShowConfirmation,
-  deleteComment,
-  setDeleteComment,
+export function Delete({
   comments,
   setComment,
+  commentId,
+  username,
+  replyId,
+  type,
 }) {
+  const [confirmation, setConfirmation] = useState(false);
+
+  const updateComment = comments.filter((c) => c.id !== commentId);
+  const updateReplies = comments.map((c) => {
+    return c.id === commentId
+      ? { ...c, replies: c.replies.filter((r) => r.id !== replyId) }
+      : c;
+  });
+
+  const isReply = type === "Reply";
+
   const handleCancel = () => {
-    setDeleteComment(null);
-    setShowConfirmation(false);
+    setConfirmation(false);
   };
 
   const handleConfirm = () => {
-    const updatedComment = comments.filter(
-      (comment) => comment.id !== deleteComment
-    );
-    setComment(updatedComment);
-    setDeleteComment(null);
-    setShowConfirmation(false);
+    username === currentUser.username
+      ? isReply
+        ? setComment(updateReplies)
+        : setComment(updateComment)
+      : null;
   };
 
   return (
     <>
-      {showConfirmation && (
-        <div>
-          <p>Are You Sure YOu want to delete this comment?</p>
-          <button onClick={handleCancel}>Cancel</button>
-          <button onClick={handleConfirm}>Confirm</button>
-        </div>
-      )}
+      {username === currentUser.username ? (
+        <>
+          {confirmation ? (
+            <div className="confirm-delete">
+              <p>Are You Sure YOu want to delete this comment?</p>
+              <button onClick={handleCancel}>Cancel</button>
+              <button onClick={handleConfirm}>Confirm</button>
+            </div>
+          ) : (
+            <button onClick={() => setConfirmation(true)}>Delete</button>
+          )}
+        </>
+      ) : null}
     </>
   );
 }
