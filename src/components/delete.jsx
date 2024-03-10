@@ -13,11 +13,11 @@ export function Delete({
   const [confirmation, setConfirmation] = useState(false);
 
   const updateComment = comments.filter((c) => c.id !== commentId);
-  const updateReplies = comments.map((c) => {
-    return c.id === commentId
+  const updateReplies = comments.map((c) =>
+    c.id === commentId
       ? { ...c, replies: c.replies.filter((r) => r.id !== replyId) }
-      : c;
-  });
+      : c
+  );
 
   const isReply = type === "Reply";
 

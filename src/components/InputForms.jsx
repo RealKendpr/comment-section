@@ -19,14 +19,14 @@ export function InputForm({
   const newReply = createReply(textArea, commentUsername);
   const newComment = createComment(textArea);
 
-  const updatedReplies = comments.map((comment) => {
-    return comment.id === commentId
+  const updatedReplies = comments.map((comment) =>
+    comment.id === commentId
       ? {
           ...comment,
           replies: [...comment.replies, newReply],
         }
-      : comment;
-  });
+      : comment
+  );
 
   const submitForm = (e) => {
     e.preventDefault();

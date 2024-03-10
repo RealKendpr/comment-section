@@ -1,31 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dataJson from "./data.json";
 
-export function Scores(props) {
-  // const Reply = (props) => {
-  let currentUser = dataJson.currentUser.username;
-
-  const [score, setCount] = useState(props.score);
+export function Scores({ comments, setComment, score, commentId, username }) {
+  let currentUser = dataJson.currentUser;
   const [hasAdded, setHasAdded] = useState(false);
 
+  useEffect(() => {
+    const boolean = localStorage.getItem("hasAdded for " + commentId);
+    boolean ? setHasAdded(JSON.parse(boolean)) : null;
+  }, [hasAdded]);
+
   const add = () => {
-    if (props.user.username === currentUser) {
-      return null;
-    } else if (hasAdded === false) {
-      updateCount(1);
-      setHasAdded(true);
-    }
+    username === currentUser.username
+      ? null
+      : hasAdded
+      ? null
+      : handleUpdate(1, true);
   };
 
   const minus = () => {
-    if (hasAdded === true) {
-      updateCount(-1);
-      setHasAdded(false);
-    }
+    username === currentUser.username
+      ? null
+      : hasAdded
+      ? handleUpdate(-1, false)
+      : null;
   };
 
-  const updateCount = (total) => {
-    setCount(score + total);
+  const handleUpdate = (total, handleHasAdded) => {
+    const updateCommentScore = comments.map((comment) =>
+      comment.id === commentId
+        ? { ...comment, score: comment.score + total }
+        : comment
+    );
+
+    setComment(updateCommentScore);
+    setHasAdded(handleHasAdded);
+    localStorage.setItem(
+      "hasAdded for " + commentId,
+      JSON.stringify(handleHasAdded)
+    );
   };
 
   return (
@@ -36,4 +49,3 @@ export function Scores(props) {
     </div>
   );
 }
-// }

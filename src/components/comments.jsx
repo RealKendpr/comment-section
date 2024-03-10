@@ -45,6 +45,8 @@ export function Comments() {
                   comments={comments}
                   setComment={setComment}
                   score={comment.score}
+                  commentId={id}
+                  username={user.username}
                 ></Scores>
                 {user.username === currentUser.username && (
                   <div className="comment-operations">
