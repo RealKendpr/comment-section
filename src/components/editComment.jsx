@@ -3,56 +3,66 @@ import { useRef, useState } from "react";
 export function EditComment({
   comments,
   setComment,
-  id,
+  commentId,
+  replyId,
   content,
   openForm,
   setOPenForm,
   type,
+  isReply,
 }) {
-  const [editedComment, setEditedComment] = useState("");
-  const [editComment, setEditComment] = useState(null);
+  const [commentValue, setCommentValue] = useState("");
   const [textArea, setTextArea] = useState("");
   const textAreaDisabled = textArea.length < 40;
   const textareaFocus = useRef(null);
 
-  const handleEdit = (commentId, content) => {
-    setEditComment(commentId);
-    setEditedComment(content);
-    setOPenForm({ commentId, type });
+  const handleEdit = (content) => {
+    setCommentValue(content);
+    setOPenForm({ commentId, replyId, type });
   };
   const handleCancel = () => {
-    setEditComment(null);
-    setEditedComment("");
+    setCommentValue("");
+    setOPenForm({ commentId: null, type: null });
   };
 
-  const updatedComments = comments.map((comment) => {
-    // return comment.id === editComment
-    //   ? { ...comment, content: editComment }
-    //   : comment;
-    if (comment.id === editComment) {
-      return {
-        ...comment,
-        content: editedComment,
-      };
-    }
-    return comment;
-  });
+  const updateComments = comments.map((c) =>
+    c.id === commentId
+      ? {
+          ...c,
+          content: commentValue,
+        }
+      : c
+  );
+
+  const updateReplies = comments.map((c) =>
+    c.id === commentId
+      ? {
+          ...c,
+          replies: c.replies.map((r) =>
+            r.id === replyId ? { ...r, content: commentValue } : r
+          ),
+        }
+      : c
+  );
 
   const handleUpdate = () => {
-    textArea.length >= 40 ? setComment(updatedComments) : null;
-    setEditComment(null);
-    setEditedComment("");
+    textArea.length >= 40
+      ? isReply
+        ? setComment(updateReplies)
+        : setComment(updateComments)
+      : null;
+    setCommentValue("");
     setOPenForm({ commentId: null, type: null });
   };
 
   return (
     <>
-      {editComment === id && openForm.commentId === id ? (
+      {openForm.commentId === commentId && openForm.replyId === replyId ? (
         <div>
           <textarea
-            value={editedComment}
+            value={commentValue}
             onChange={(e) => {
-              setEditedComment(e.target.value);
+              setCommentValue(e.target.value);
               setTextArea(e.target.value);
             }}
             onBlur={() =>
@@ -69,7 +79,7 @@ export function EditComment({
       ) : (
         <button
           onClick={() => {
-            handleEdit(id, content);
+            handleEdit(content);
             setTimeout(() => {
               textareaFocus.current.focus();
             }, 150);

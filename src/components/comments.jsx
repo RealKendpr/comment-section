@@ -53,7 +53,7 @@ export function Comments() {
                     <EditComment
                       comments={comments}
                       setComment={setComment}
-                      id={id}
+                      commentId={id}
                       content={content}
                       openForm={openForm}
                       setOPenForm={setOPenForm}

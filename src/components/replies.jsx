@@ -3,6 +3,7 @@ import { InputForm } from "./InputForms";
 import { Scores } from "./score";
 import { EditComment } from "./editComment";
 import { Delete } from "./delete";
+import { Edit } from "./edit";
 
 export function Replies({
   currentUser,
@@ -14,8 +15,6 @@ export function Replies({
   comments,
   setComment,
 }) {
-  const [reply, setReply] = useState(replies);
-
   return (
     <>
       {commentUsername !== currentUser.username && (
@@ -57,13 +56,15 @@ export function Replies({
                     {user.username === currentUser.username ? (
                       <div className="comment-operations">
                         <EditComment
-                          comments={reply}
-                          setComment={setReply}
-                          id={id}
+                          comments={comments}
+                          setComment={setComment}
+                          commentId={commentId}
+                          replyId={id}
                           content={content}
                           openForm={openForm}
                           setOPenForm={setOPenForm}
                           type="EditForm"
+                          isReply={true}
                         ></EditComment>
                         <Delete
                           comments={comments}
@@ -72,6 +73,7 @@ export function Replies({
                           replyId={id}
                           username={user.username}
                           type="Reply"
+                          isReply={true}
                         ></Delete>
                       </div>
                     ) : null}
