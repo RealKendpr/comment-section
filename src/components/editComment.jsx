@@ -29,6 +29,7 @@ export function EditComment({
     c.id === commentId
       ? {
           ...c,
+          createdAt: new Date().getDate(),
           content: commentValue,
         }
       : c
@@ -39,7 +40,9 @@ export function EditComment({
       ? {
           ...c,
           replies: c.replies.map((r) =>
-            r.id === replyId ? { ...r, content: commentValue } : r
+            r.id === replyId
+              ? { ...r, createdAt: new Date().getDate(), content: commentValue }
+              : r
           ),
         }
       : c
