@@ -13,12 +13,12 @@ export function Scores({
   const [hasAdded, setHasAdded] = useState(false);
   const isCurrentUser = dataJson.currentUser.username === username;
   const isReply = type === "Reply";
+  const storageId = "hasAdded for " + (isReply ? replyId : commentId);
 
   useEffect(() => {
-    const boolean = localStorage.getItem(
-      "hasAdded for " + (isReply ? replyId : commentId)
-    );
+    const boolean = localStorage.getItem(storageId);
     boolean ? setHasAdded(JSON.parse(boolean)) : null;
+    localStorage.removeItem(boolean === "false" ? storageId : null);
   }, [hasAdded]);
 
   const add = () => {
@@ -47,10 +47,7 @@ export function Scores({
 
     isReply ? setComment(updateReplyScore) : setComment(updateCommentScore);
     setHasAdded(handleHasAdded);
-    localStorage.setItem(
-      "hasAdded for " + (isReply ? replyId : commentId),
-      JSON.stringify(handleHasAdded)
-    );
+    localStorage.setItem(storageId, JSON.stringify(handleHasAdded));
   };
 
   return (
