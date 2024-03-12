@@ -3,7 +3,7 @@ import dataJson from "../src/data/data.json";
 import { Comments } from "./components/comments";
 import { InputForm } from "./components/forms/InputForms";
 
-function App() {
+export default function App() {
   const [comments, setComment] = useState(() => {
     const localValue = localStorage.getItem("COMMENTS");
     localValue === null && [];
@@ -40,5 +40,3 @@ function App() {
     </>
   );
 }
-
-export default App;

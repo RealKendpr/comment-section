@@ -29,9 +29,9 @@ export function Scores({
     isCurrentUser ? null : hasAdded ? handleUpdate(-1, false) : null;
   };
 
-  const handleUpdate = (total, handleHasAdded) => {
+  const handleUpdate = (value, handleHasVoted) => {
     const updateCommentScore = comments.map((c) =>
-      c.id === commentId ? { ...c, score: c.score + total } : c
+      c.id === commentId ? { ...c, score: c.score + value } : c
     );
 
     const updateReplyScore = comments.map((c) =>
@@ -39,15 +39,15 @@ export function Scores({
         ? {
             ...c,
             replies: c.replies.map((r) =>
-              r.id === replyId ? { ...r, score: r.score + total } : r
+              r.id === replyId ? { ...r, score: r.score + value } : r
             ),
           }
         : c
     );
 
     isReply ? setComment(updateReplyScore) : setComment(updateCommentScore);
-    setHasAdded(handleHasAdded);
-    localStorage.setItem(storageId, JSON.stringify(handleHasAdded));
+    setHasAdded(handleHasVoted);
+    localStorage.setItem(storageId, JSON.stringify(handleHasVoted));
   };
 
   return (

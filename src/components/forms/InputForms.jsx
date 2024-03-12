@@ -20,13 +20,13 @@ export function InputForm({
   const newComment = createComment(commentValue);
   const isCommentForm = type === "CommentForm";
 
-  const updatedReplies = comments.map((comment) =>
-    comment.id === commentId
+  const updatedReplies = comments.map((c) =>
+    c.id === commentId
       ? {
-          ...comment,
-          replies: [...comment.replies, newReply],
+          ...c,
+          replies: [...c.replies, newReply],
         }
-      : comment
+      : c
   );
 
   const submitForm = (e) => {
