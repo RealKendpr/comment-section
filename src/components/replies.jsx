@@ -13,6 +13,8 @@ export function Replies({
   setOPenForm,
   comments,
   setComment,
+  // setConfirmation,
+  // setIsReply,
 }) {
   return (
     <>
@@ -81,8 +83,9 @@ export function Replies({
                         commentId={commentId}
                         replyId={id}
                         username={user.username}
-                        type="Reply"
                         isReply={true}
+                        // setIsReply={setIsReply}
+                        // setConfirmation={setConfirmation}
                       ></Delete>
                     </div>
                   ) : null}

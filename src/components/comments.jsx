@@ -3,10 +3,16 @@ import { Replies } from "./replies";
 import { Scores } from "./score";
 import { Delete } from "./delete";
 import { EditComment } from "./editComment";
-import { InputForm } from "./InputForms";
 import TimeAgo from "react-timeago";
 
-export function Comments({ comments, setComment, openForm, setOPenForm }) {
+export function Comments({
+  comments,
+  setComment,
+  openForm,
+  setOPenForm,
+  setConfirmation,
+  setIsReply
+}) {
   const currentUser = dataJson.currentUser;
 
   return (
@@ -56,6 +62,7 @@ export function Comments({ comments, setComment, openForm, setOPenForm }) {
                     setComment={setComment}
                     commentId={id}
                     username={user.username}
+                    // setConfirmation={setConfirmation}
                   ></Delete>
                 </div>
               )}
@@ -68,18 +75,13 @@ export function Comments({ comments, setComment, openForm, setOPenForm }) {
                 commentId={id}
                 openForm={openForm}
                 setOPenForm={setOPenForm}
+                // setConfirmation={setConfirmation}
+                // setIsReply={setIsReply}
               ></Replies>
             </div>
           </div>
         );
       })}
-      <InputForm
-        comments={comments}
-        setComment={setComment}
-        openForm={openForm}
-        setOPenForm={setOPenForm}
-        type="CommentForm"
-      ></InputForm>
     </div>
   );
 }

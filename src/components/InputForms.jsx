@@ -67,43 +67,47 @@ export function InputForm({
           </form>
         </div>
       ) : (
-        <div
-          className={
-            openForm.commentId === commentId &&
-            openForm.replyId === replyId &&
-            openForm.type === type
-              ? "reply-form"
-              : "hidden-form"
-          }
-          id={isCommentForm ? "ReplyToComment" : "ReplyToReply"}
-        >
-          <div>
-            <img src={currentUser.image.png} alt="" />
+        <>
+          <div
+            className={
+              openForm.commentId === commentId &&
+              openForm.replyId === replyId &&
+              openForm.type === type
+                ? "reply-form"
+                : "hidden-form"
+            }
+            id={isCommentForm ? "ReplyToComment" : "ReplyToReply"}
+          >
+            <div>
+              <img src={currentUser.image.png} alt="" />
+            </div>
+            <form onSubmit={submitForm}>
+              <textarea
+                value={commentValue}
+                onChange={(e) => setCommentValue(e.target.value)}
+                onBlur={() =>
+                  textareaDisabled &&
+                  setOPenForm({ commentId: null, type: null })
+                }
+                ref={textareaFocus}
+              ></textarea>
+              <button className="solid-btn" disabled={textareaDisabled}>
+                REPLY
+              </button>
+            </form>
           </div>
-          <form onSubmit={submitForm}>
-            <textarea
-              value={commentValue}
-              onChange={(e) => setCommentValue(e.target.value)}
-              onBlur={() =>
-                textareaDisabled && setOPenForm({ commentId: null, type: null })
-              }
-              ref={textareaFocus}
-            ></textarea>
-            <button className="solid-btn" disabled={textareaDisabled}>
-              REPLY
+
+          {openForm.commentId === commentId &&
+          openForm.replyId === replyId &&
+          openForm.type === type ? null : (
+            <button
+              className="mini-btn"
+              onClick={() => setOPenForm({ commentId, replyId, type })}
+            >
+              Reply
             </button>
-          </form>
-        </div>
-      )}
-      {openForm.commentId === commentId &&
-      openForm.replyId === replyId &&
-      openForm.type === type ? null : (
-        <button
-          className="mini-btn"
-          onClick={() => setOPenForm({ commentId, replyId, type })}
-        >
-          Reply
-        </button>
+          )}
+        </>
       )}
     </>
   );
