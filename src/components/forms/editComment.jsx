@@ -1,19 +1,18 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import {
+  CommentIdContext,
+  CommentContext,
+  OpenFormContext,
+} from "../../context/context";
 
-export function EditComment({
-  comments,
-  setComment,
-  commentId,
-  replyId,
-  content,
-  openForm,
-  setOPenForm,
-  type,
-  isReply,
-}) {
+export function EditComment({ replyId, content, type, isReply }) {
   const [commentValue, setCommentValue] = useState("");
   const commentValueDisabled = commentValue.length === 0;
   const textareaFocus = useRef(null);
+
+  const { comments, setComment } = useContext(CommentContext);
+  const { openForm, setOPenForm } = useContext(OpenFormContext);
+  const commentId = useContext(CommentIdContext);
 
   const handleEdit = (content) => {
     setCommentValue(content);

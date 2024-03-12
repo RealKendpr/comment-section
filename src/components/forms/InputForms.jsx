@@ -1,17 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { createReply, createComment } from "../../utils/api";
 import dataJson from "../../data/data.json";
+import {
+  CommentIdContext,
+  CommentContext,
+  OpenFormContext,
+} from "../../context/context";
 
-export function InputForm({
-  commentUsername,
-  comments,
-  setComment,
-  openForm,
-  setOPenForm,
-  commentId,
-  replyId,
-  type,
-}) {
+export function InputForm({ commentUsername, replyId, type }) {
   const currentUser = dataJson.currentUser;
   const [commentValue, setCommentValue] = useState("");
   const textareaDisabled = commentValue.length === 0;
@@ -19,6 +15,10 @@ export function InputForm({
   const newReply = createReply(commentValue, commentUsername);
   const newComment = createComment(commentValue);
   const isCommentForm = type === "CommentForm";
+  
+  const commentId = useContext(CommentIdContext);
+  const { comments, setComment } = useContext(CommentContext);
+  const { openForm, setOPenForm } = useContext(OpenFormContext);
 
   const updatedReplies = comments.map((c) =>
     c.id === commentId

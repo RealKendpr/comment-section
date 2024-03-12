@@ -3,27 +3,16 @@ import { Scores } from "./score";
 import { EditComment } from "./forms/editComment";
 import { Delete } from "./delete";
 import TimeAgo from "react-timeago";
+import { useContext } from "react";
+import { OpenFormContext } from "../context/context";
 
-export function Replies({
-  currentUser,
-  replies,
-  commentUsername,
-  commentId,
-  openForm,
-  setOPenForm,
-  comments,
-  setComment,
-}) {
+export function Replies({ currentUser, replies, commentUsername }) {
+  const { openForm } = useContext(OpenFormContext);
   return (
     <>
       {commentUsername !== currentUser.username && (
         <InputForm
           commentUsername={commentUsername}
-          comments={comments}
-          setComment={setComment}
-          openForm={openForm}
-          setOPenForm={setOPenForm}
-          commentId={commentId}
           type="ReplyToComment"
         ></InputForm>
       )}
@@ -52,10 +41,7 @@ export function Replies({
                     )}
                   </article>
                   <Scores
-                    comments={comments}
-                    setComment={setComment}
                     score={eachReply.score}
-                    commentId={commentId}
                     replyId={id}
                     username={user.username}
                     type="Reply"
@@ -65,20 +51,12 @@ export function Replies({
                   {user.username === currentUser.username ? (
                     <div className="user-operations">
                       <EditComment
-                        comments={comments}
-                        setComment={setComment}
-                        commentId={commentId}
                         replyId={id}
                         content={content}
-                        openForm={openForm}
-                        setOPenForm={setOPenForm}
                         type="EditForm"
                         isReply={true}
                       ></EditComment>
                       <Delete
-                        comments={comments}
-                        setComment={setComment}
-                        commentId={commentId}
                         replyId={id}
                         username={user.username}
                         isReply={true}
@@ -87,12 +65,7 @@ export function Replies({
                   ) : null}
                   <InputForm
                     commentUsername={user.username}
-                    comments={comments}
-                    setComment={setComment}
                     replyId={id}
-                    openForm={openForm}
-                    setOPenForm={setOPenForm}
-                    commentId={commentId}
                     type="ReplyToReply"
                   ></InputForm>
                 </div>

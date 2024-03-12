@@ -1,18 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import dataJson from "../data/data.json";
+import { CommentIdContext, CommentContext } from "../context/context";
 
-export function Scores({
-  comments,
-  setComment,
-  score,
-  commentId,
-  replyId,
-  username,
-  type,
-}) {
+export function Scores({ score, replyId, username, type }) {
   const [hasAdded, setHasAdded] = useState(false);
   const isCurrentUser = dataJson.currentUser.username === username;
   const isReply = type === "Reply";
+
+  const { comments, setComment } = useContext(CommentContext);
+  const commentId = useContext(CommentIdContext);
+
   const storageId = "hasAdded for " + (isReply ? replyId : commentId);
 
   useEffect(() => {

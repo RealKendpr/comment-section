@@ -4,10 +4,18 @@ import { Scores } from "./score";
 import { Delete } from "./delete";
 import { EditComment } from "./forms/editComment";
 import TimeAgo from "react-timeago";
+import { useContext } from "react";
+import {
+  CommentIdContext,
+  CommentContext,
+  OpenFormContext,
+} from "../context/context";
 
-export function Comments({ comments, setComment, openForm, setOPenForm }) {
+export function Comments() {
   const currentUser = dataJson.currentUser;
 
+  const { comments } = useContext(CommentContext);
+  const { openForm } = useContext(OpenFormContext);
   return (
     <div className="comment-list">
       {comments.map((comment) => {
@@ -31,43 +39,28 @@ export function Comments({ comments, setComment, openForm, setOPenForm }) {
                 )}
               </article>
               <Scores
-                comments={comments}
-                setComment={setComment}
                 score={comment.score}
                 commentId={id}
                 username={user.username}
               ></Scores>
             </div>
             <div className="comment-operations">
-              {user.username === currentUser.username && (
-                <div className="user-operations">
-                  <EditComment
-                    comments={comments}
-                    setComment={setComment}
-                    commentId={id}
-                    content={content}
-                    openForm={openForm}
-                    setOPenForm={setOPenForm}
-                    type="EditForm"
-                  ></EditComment>
-                  <Delete
-                    comments={comments}
-                    setComment={setComment}
-                    commentId={id}
-                    username={user.username}
-                  ></Delete>
-                </div>
-              )}
-              <Replies
-                commentUsername={user.username}
-                currentUser={currentUser}
-                replies={replies}
-                comments={comments}
-                setComment={setComment}
-                commentId={id}
-                openForm={openForm}
-                setOPenForm={setOPenForm}
-              ></Replies>
+              <CommentIdContext.Provider value={id}>
+                {user.username === currentUser.username && (
+                  <div className="user-operations">
+                    <EditComment
+                      content={content}
+                      type="EditForm"
+                    ></EditComment>
+                    <Delete username={user.username}></Delete>
+                  </div>
+                )}
+                <Replies
+                  commentUsername={user.username}
+                  currentUser={currentUser}
+                  replies={replies}
+                ></Replies>
+              </CommentIdContext.Provider>
             </div>
           </div>
         );

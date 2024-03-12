@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import dataJson from "../src/data/data.json";
 import { Comments } from "./components/comments";
 import { InputForm } from "./components/forms/InputForms";
+import { CommentContext, OpenFormContext } from "./context/context";
 
 export default function App() {
   const [comments, setComment] = useState(() => {
@@ -23,19 +24,16 @@ export default function App() {
   return (
     <>
       <main className="comment-section">
-        <Comments
-          comments={comments}
-          setComment={setComment}
-          openForm={openForm}
-          setOPenForm={setOPenForm}
-        ></Comments>
-        <InputForm
-          comments={comments}
-          setComment={setComment}
-          openForm={openForm}
-          setOPenForm={setOPenForm}
-          type="CommentForm"
-        ></InputForm>
+        <CommentContext.Provider value={{ comments, setComment }}>
+          <OpenFormContext.Provider value={{ openForm, setOPenForm }}>
+            <Comments openForm={openForm} setOPenForm={setOPenForm}></Comments>
+            <InputForm
+              openForm={openForm}
+              setOPenForm={setOPenForm}
+              type="CommentForm"
+            ></InputForm>
+          </OpenFormContext.Provider>
+        </CommentContext.Provider>
       </main>
     </>
   );
