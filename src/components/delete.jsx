@@ -8,7 +8,7 @@ export function Delete({
   commentId,
   username,
   replyId,
-  type,
+  isReply,
 }) {
   const [confirmation, setConfirmation] = useState(false);
 
@@ -18,8 +18,6 @@ export function Delete({
       ? { ...c, replies: c.replies.filter((r) => r.id !== replyId) }
       : c
   );
-
-  const isReply = type === "Reply";
 
   const handleCancel = () => {
     setConfirmation(false);
@@ -38,20 +36,22 @@ export function Delete({
       {username === currentUser.username ? (
         <>
           {confirmation ? (
-            <div className="delete-confirmation">
-              <p>
-                <b>Delete Comment</b>
-              </p>
-              <p>
-                Are you sure you want to delete this comment? This will remove
-                the comment and can't be undone.
-              </p>
-              <button className="solid-btn grey-btn" onClick={handleCancel}>
-                NO, CANCEL
-              </button>
-              <button className="solid-btn red-btn" onClick={handleConfirm}>
-                YES, DELETE
-              </button>
+            <div className="delete-wrapper">
+              <div className="delete-confirmation">
+                <p>
+                  <b>Delete Comment</b>
+                </p>
+                <p>
+                  Are you sure you want to delete this comment? This will remove
+                  the comment and can't be undone.
+                </p>
+                <button className="solid-btn grey-btn" onClick={handleCancel}>
+                  NO, CANCEL
+                </button>
+                <button className="solid-btn red-btn" onClick={handleConfirm}>
+                  YES, DELETE
+                </button>
+              </div>
             </div>
           ) : (
             <button

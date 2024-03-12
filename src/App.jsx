@@ -9,8 +9,6 @@ function App() {
     localValue === null && [];
     return localValue ? JSON.parse(localValue) : dataJson.comments;
   });
-  // const [confirmation, setConfirmation] = useState(null);
-  // const [isReply, setIsReply] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("COMMENTS", JSON.stringify(comments));
@@ -30,8 +28,6 @@ function App() {
           setComment={setComment}
           openForm={openForm}
           setOPenForm={setOPenForm}
-          // setConfirmation={setConfirmation}
-          // setIsReply={setIsReply}
         ></Comments>
         <InputForm
           comments={comments}
@@ -40,14 +36,6 @@ function App() {
           setOPenForm={setOPenForm}
           type="CommentForm"
         ></InputForm>
-        {/* <DeleteConfirmation
-          comments={comments}
-          setComment={setComment}
-          confirmation={confirmation}
-          setConfirmation={setConfirmation}
-          isReply={isReply}
-          setIsReply={setIsReply}
-        ></DeleteConfirmation> */}
       </main>
     </>
   );

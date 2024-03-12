@@ -10,8 +10,6 @@ export function Comments({
   setComment,
   openForm,
   setOPenForm,
-  setConfirmation,
-  setIsReply
 }) {
   const currentUser = dataJson.currentUser;
 
@@ -62,7 +60,6 @@ export function Comments({
                     setComment={setComment}
                     commentId={id}
                     username={user.username}
-                    // setConfirmation={setConfirmation}
                   ></Delete>
                 </div>
               )}
@@ -75,8 +72,6 @@ export function Comments({
                 commentId={id}
                 openForm={openForm}
                 setOPenForm={setOPenForm}
-                // setConfirmation={setConfirmation}
-                // setIsReply={setIsReply}
               ></Replies>
             </div>
           </div>
