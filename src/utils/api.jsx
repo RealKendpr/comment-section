@@ -1,4 +1,4 @@
-import dataJson from "./data.json";
+import dataJson from "../data/data.json";
 
 export const createComment = (textArea) => ({
   id: Math.random().toString(36).substring(2, 9),

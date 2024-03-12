@@ -1,16 +1,11 @@
-import dataJson from "./data.json";
+import dataJson from "../data/data.json";
 import { Replies } from "./replies";
 import { Scores } from "./score";
 import { Delete } from "./delete";
-import { EditComment } from "./editComment";
+import { EditComment } from "./forms/editComment";
 import TimeAgo from "react-timeago";
 
-export function Comments({
-  comments,
-  setComment,
-  openForm,
-  setOPenForm,
-}) {
+export function Comments({ comments, setComment, openForm, setOPenForm }) {
   const currentUser = dataJson.currentUser;
 
   return (

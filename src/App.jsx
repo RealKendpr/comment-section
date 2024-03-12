@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import dataJson from "./components/data.json";
+import dataJson from "../src/data/data.json";
 import { Comments } from "./components/comments";
-import { InputForm } from "./components/InputForms";
+import { InputForm } from "./components/forms/InputForms";
 
 function App() {
   const [comments, setComment] = useState(() => {

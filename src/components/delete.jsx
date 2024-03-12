@@ -1,5 +1,5 @@
 import { useState } from "react";
-import dataJson from "./data.json";
+import dataJson from "../data/data.json";
 const currentUser = dataJson.currentUser;
 
 export function Delete({

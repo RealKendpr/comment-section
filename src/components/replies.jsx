@@ -1,6 +1,6 @@
-import { InputForm } from "./InputForms";
+import { InputForm } from "./forms/InputForms";
 import { Scores } from "./score";
-import { EditComment } from "./editComment";
+import { EditComment } from "./forms/editComment";
 import { Delete } from "./delete";
 import TimeAgo from "react-timeago";
 

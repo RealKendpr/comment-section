@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { createReply, createComment } from "./api";
-import dataJson from "./data.json";
+import { createReply, createComment } from "../../utils/api";
+import dataJson from "../../data/data.json";
 
 export function InputForm({
   commentUsername,

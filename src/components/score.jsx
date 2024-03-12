@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import dataJson from "./data.json";
+import dataJson from "../data/data.json";
 
 export function Scores({
   comments,
