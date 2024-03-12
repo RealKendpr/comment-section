@@ -33,67 +33,70 @@ export function Replies({
             const { id, content, createdAt, replyingTo, user } = eachReply;
             return (
               <div key={id}>
-                <article key={id}>
-                  <div>
-                    <img src={user.image.png} alt="" />
-                    <a href="#">{user.username}</a>
-                    <div>
+                <div>
+                  <article key={id} className="reply">
+                    <div className="comment-info">
+                      <img src={user.image.png} alt="" />
+                      <a href="#">{user.username}</a> &nbsp;
                       {createdAt.includes("ago") ? (
                         <time>{createdAt}</time>
                       ) : (
                         <TimeAgo date={createdAt} live={false}></TimeAgo>
                       )}
                     </div>
-                  </div>
-                  <p>
-                    <a href="#">{"@" + replyingTo}</a> &nbsp; {content}
-                  </p>
-                  <div>
-                    <Scores
-                      comments={comments}
-                      setComment={setComment}
-                      score={eachReply.score}
-                      commentId={commentId}
-                      replyId={id}
-                      username={user.username}
-                      type="Reply"
-                    ></Scores>
-                    {user.username === currentUser.username ? (
-                      <div className="comment-operations">
-                        <EditComment
-                          comments={comments}
-                          setComment={setComment}
-                          commentId={commentId}
-                          replyId={id}
-                          content={content}
-                          openForm={openForm}
-                          setOPenForm={setOPenForm}
-                          type="EditForm"
-                          isReply={true}
-                        ></EditComment>
-                        <Delete
-                          comments={comments}
-                          setComment={setComment}
-                          commentId={commentId}
-                          replyId={id}
-                          username={user.username}
-                          type="Reply"
-                          isReply={true}
-                        ></Delete>
-                      </div>
-                    ) : null}
-                  </div>
-                </article>
-                <InputForm
-                  commentUsername={user.username}
-                  comments={comments}
-                  setComment={setComment}
-                  replyId={id}
-                  openForm={openForm}
-                  setOPenForm={setOPenForm}
-                  commentId={commentId}
-                  type="ReplyToReply"
-                ></InputForm>
+                    {openForm.replyId === id &&
+                    openForm.type === "EditForm" ? null : (
+                      <p>
+                        <a href="#">{"@" + replyingTo}</a> &nbsp; {content}
+                      </p>
+                    )}
+                  </article>
+                  <Scores
+                    comments={comments}
+                    setComment={setComment}
+                    score={eachReply.score}
+                    commentId={commentId}
+                    replyId={id}
+                    username={user.username}
+                    type="Reply"
+                  ></Scores>
+                </div>
+                <div className="comment-operations">
+                  {user.username === currentUser.username ? (
+                    <div className="user-operations">
+                      <EditComment
+                        comments={comments}
+                        setComment={setComment}
+                        commentId={commentId}
+                        replyId={id}
+                        content={content}
+                        openForm={openForm}
+                        setOPenForm={setOPenForm}
+                        type="EditForm"
+                        isReply={true}
+                      ></EditComment>
+                      <Delete
+                        comments={comments}
+                        setComment={setComment}
+                        commentId={commentId}
+                        replyId={id}
+                        username={user.username}
+                        type="Reply"
+                        isReply={true}
+                      ></Delete>
+                    </div>
+                  ) : null}
+                  <InputForm
+                    commentUsername={user.username}
+                    comments={comments}
+                    setComment={setComment}
+                    replyId={id}
+                    openForm={openForm}
+                    setOPenForm={setOPenForm}
+                    commentId={commentId}
+                    type="ReplyToReply"
+                  ></InputForm>
+                </div>
               </div>
             );
           })}

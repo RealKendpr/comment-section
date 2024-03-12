@@ -38,13 +38,28 @@ export function Delete({
       {username === currentUser.username ? (
         <>
           {confirmation ? (
-            <div className="confirm-delete">
-              <p>Are You Sure YOu want to delete this comment?</p>
-              <button onClick={handleCancel}>Cancel</button>
-              <button onClick={handleConfirm}>Confirm</button>
+            <div className="delete-confirmation">
+              <p>
+                <b>Delete Comment</b>
+              </p>
+              <p>
+                Are you sure you want to delete this comment? This will remove
+                the comment and can't be undone.
+              </p>
+              <button className="solid-btn grey-btn" onClick={handleCancel}>
+                NO, CANCEL
+              </button>
+              <button className="solid-btn red-btn" onClick={handleConfirm}>
+                YES, DELETE
+              </button>
             </div>
           ) : (
-            <button onClick={() => setConfirmation(true)}>Delete</button>
+            <button
+              className="delete-btn mini-btn"
+              onClick={() => setConfirmation(true)}
+            >
+              Delete
+            </button>
           )}
         </>
       ) : null}

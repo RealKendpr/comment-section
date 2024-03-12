@@ -13,12 +13,12 @@ export function InputForm({
   type,
 }) {
   const currentUser = dataJson.currentUser;
-  const [textArea, setTextArea] = useState("");
-
-  const textAreaDisabled = textArea.length < 40;
+  const [commentValue, setCommentValue] = useState("");
+  const textareaDisabled = commentValue.length === 0;
   const textareaFocus = useRef(null);
-  const newReply = createReply(textArea, commentUsername);
-  const newComment = createComment(textArea);
+  const newReply = createReply(commentValue, commentUsername);
+  const newComment = createComment(commentValue);
+  const isCommentForm = type === "CommentForm";
 
   const updatedReplies = comments.map((comment) =>
     comment.id === commentId
@@ -31,16 +31,14 @@ export function InputForm({
 
   const submitForm = (e) => {
     e.preventDefault();
-    textArea.length >= 40
+    textareaDisabled === false
       ? isCommentForm
         ? setComment([...comments, newComment])
         : setComment(updatedReplies)
       : null;
-    setTextArea("");
+    setCommentValue("");
     setOPenForm({ commentId: null, type: null });
   };
-
-  const isCommentForm = type === "CommentForm";
 
   useEffect(() => {
     openForm.commentId === commentId &&
@@ -53,42 +51,58 @@ export function InputForm({
   return (
     <>
       {isCommentForm ? (
-        <>
+        <div className="user-comment-input">
           <div>
             <img src={currentUser.image.png} alt="" />
           </div>
-          <form onSubmit={submitForm}>
+          <form className="comment-form" onSubmit={submitForm}>
             <textarea
-              value={textArea}
-              onChange={(e) => setTextArea(e.target.value)}
+              value={commentValue}
+              onChange={(e) => setCommentValue(e.target.value)}
               onFocus={() => setOPenForm({ commentId: null, type: null })}
             ></textarea>
-            <button disabled={textAreaDisabled}>Send</button>
-          </form>
-        </>
-      ) : openForm.commentId === commentId &&
-        openForm.replyId === replyId &&
-        openForm.type === type ? (
-        <div className={isCommentForm ? "ReplyToComment" : "ReplyToReply"}>
-          <div>
-            <img src={currentUser.image.png} alt="" />
-          </div>
-          <form onSubmit={submitForm}>
-            <textarea
-              value={textArea}
-              onChange={(e) => setTextArea(e.target.value)}
-              onBlur={() =>
-                textArea.length === 0 &&
-                setOPenForm({ commentId: null, type: null })
-              }
-              ref={textareaFocus}
-            ></textarea>
-            <button disabled={textAreaDisabled}>REPLY</button>
+            <button className="solid-btn" disabled={textareaDisabled}>
+              Send
+            </button>
           </form>
         </div>
       ) : (
-        <button onClick={() => setOPenForm({ commentId, replyId, type })}>
-          REPLY
+        <div
+          className={
+            openForm.commentId === commentId &&
+            openForm.replyId === replyId &&
+            openForm.type === type
+              ? "reply-form"
+              : "hidden-form"
+          }
+          id={isCommentForm ? "ReplyToComment" : "ReplyToReply"}
+        >
+          <div>
+            <img src={currentUser.image.png} alt="" />
+          </div>
+          <form onSubmit={submitForm}>
+            <textarea
+              value={commentValue}
+              onChange={(e) => setCommentValue(e.target.value)}
+              onBlur={() =>
+                textareaDisabled && setOPenForm({ commentId: null, type: null })
+              }
+              ref={textareaFocus}
+            ></textarea>
+            <button className="solid-btn" disabled={textareaDisabled}>
+              REPLY
+            </button>
+          </form>
+        </div>
+      )}
+      {openForm.commentId === commentId &&
+      openForm.replyId === replyId &&
+      openForm.type === type ? null : (
+        <button
+          className="mini-btn"
+          onClick={() => setOPenForm({ commentId, replyId, type })}
+        >
+          Reply
         </button>
       )}
     </>

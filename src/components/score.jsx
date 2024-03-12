@@ -51,7 +51,7 @@ export function Scores({
   };
 
   return (
-    <div>
+    <div className="scores">
       <button onClick={add}>+</button>
       <span>{score}</span>
       <button onClick={minus}>-</button>

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import dataJson from "./data.json";
 import { Replies } from "./replies";
 import { Scores } from "./score";
@@ -7,96 +6,80 @@ import { EditComment } from "./editComment";
 import { InputForm } from "./InputForms";
 import TimeAgo from "react-timeago";
 
-export function Comments() {
+export function Comments({ comments, setComment, openForm, setOPenForm }) {
   const currentUser = dataJson.currentUser;
-  const [comments, setComment] = useState(() => {
-    const localValue = localStorage.getItem("COMMENTS");
-    localValue === null && [];
-    return localValue ? JSON.parse(localValue) : dataJson.comments;
-  });
-
-  useEffect(() => {
-    localStorage.setItem("COMMENTS", JSON.stringify(comments));
-  }, [comments]);
-
-  const [openForm, setOPenForm] = useState({
-    commentId: null,
-    replyId: null,
-    type: null,
-  });
 
   return (
-    <>
+    <div className="comment-list">
       {comments.map((comment) => {
         const { id, user, createdAt, content, replies } = comment;
         return (
-          <div key={id}>
-            <article key={id}>
-              <div>
-                <div className="comment">
-                  <div className="comment-info">
-                    <img src={user.image.png} alt="" />
-                    <a href="#">{user.username}</a> &nbsp;
-                    <div>
-                      {createdAt.includes("ago") ? (
-                        <time>{createdAt}</time>
-                      ) : (
-                        <TimeAgo date={createdAt} live={false}></TimeAgo>
-                      )}
-                    </div>
-                  </div>
-                  <p>{content}</p>
+          <div key={id} className="comment-wrapper">
+            <div className="mid-wrapper">
+              <article key={id} className="comment">
+                <div className="comment-info">
+                  <img src={user.image.png} alt="" />
+                  <a href="#">{user.username}</a> &nbsp;
+                  {createdAt.includes("ago") ? (
+                    <time>{createdAt}</time>
+                  ) : (
+                    <TimeAgo date={createdAt} live={false}></TimeAgo>
+                  )}
                 </div>
-                <Scores
-                  comments={comments}
-                  setComment={setComment}
-                  score={comment.score}
-                  commentId={id}
-                  username={user.username}
-                ></Scores>
-                {user.username === currentUser.username && (
-                  <div className="comment-operations">
-                    <EditComment
-                      comments={comments}
-                      setComment={setComment}
-                      commentId={id}
-                      content={content}
-                      openForm={openForm}
-                      setOPenForm={setOPenForm}
-                      type="EditForm"
-                    ></EditComment>
-                    <Delete
-                      comments={comments}
-                      setComment={setComment}
-                      commentId={id}
-                      username={user.username}
-                    ></Delete>
-                  </div>
+                {openForm.commentId === id &&
+                openForm.type === "EditForm" ? null : (
+                  <p>{content}</p>
                 )}
-              </div>
-            </article>
-            <Replies
-              commentUsername={user.username}
-              currentUser={currentUser}
-              replies={replies}
-              comments={comments}
-              setComment={setComment}
-              commentId={id}
-              openForm={openForm}
-              setOPenForm={setOPenForm}
-            ></Replies>
+              </article>
+              <Scores
+                comments={comments}
+                setComment={setComment}
+                score={comment.score}
+                commentId={id}
+                username={user.username}
+              ></Scores>
+            </div>
+            <div className="comment-operations">
+              {user.username === currentUser.username && (
+                <div className="user-operations">
+                  <EditComment
+                    comments={comments}
+                    setComment={setComment}
+                    commentId={id}
+                    content={content}
+                    openForm={openForm}
+                    setOPenForm={setOPenForm}
+                    type="EditForm"
+                  ></EditComment>
+                  <Delete
+                    comments={comments}
+                    setComment={setComment}
+                    commentId={id}
+                    username={user.username}
+                  ></Delete>
+                </div>
+              )}
+              <Replies
+                commentUsername={user.username}
+                currentUser={currentUser}
+                replies={replies}
+                comments={comments}
+                setComment={setComment}
+                commentId={id}
+                openForm={openForm}
+                setOPenForm={setOPenForm}
+              ></Replies>
+            </div>
           </div>
         );
       })}
-      <div className="userInputs">
-        <InputForm
-          comments={comments}
-          setComment={setComment}
-          openForm={openForm}
-          setOPenForm={setOPenForm}
-          type="CommentForm"
-        ></InputForm>
-      </div>
-    </>
+      <InputForm
+        comments={comments}
+        setComment={setComment}
+        openForm={openForm}
+        setOPenForm={setOPenForm}
+        type="CommentForm"
+      ></InputForm>
+    </div>
   );
 }

@@ -12,8 +12,7 @@ export function EditComment({
   isReply,
 }) {
   const [commentValue, setCommentValue] = useState("");
-  const [textArea, setTextArea] = useState("");
-  const textAreaDisabled = textArea.length < 40;
+  const commentValueDisabled = commentValue.length === 0;
   const textareaFocus = useRef(null);
 
   const handleEdit = (content) => {
@@ -22,7 +21,7 @@ export function EditComment({
   };
   const handleCancel = () => {
     setCommentValue("");
-    setOPenForm({ commentId: null, type: null });
+    setOPenForm({ commentId: null, replyId: null, type: null });
   };
 
   const updateComments = comments.map((c) =>
@@ -52,14 +51,15 @@ export function EditComment({
       : c
   );
 
-  const handleUpdate = () => {
-    textArea.length >= 40
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    commentValueDisabled === false
       ? isReply
         ? setComment(updateReplies)
         : setComment(updateComments)
       : null;
     setCommentValue("");
-    setOPenForm({ commentId: null, type: null });
+    setOPenForm({ commentId: null, replyId: null, type: null });
   };
 
   useEffect(() => {
@@ -72,29 +72,37 @@ export function EditComment({
 
   return (
     <>
-      {openForm.commentId === commentId &&
-      openForm.replyId === replyId &&
-      openForm.type === type ? (
-        <div>
+      <div
+        className={
+          openForm.commentId === commentId &&
+          openForm.replyId === replyId &&
+          openForm.type === type
+            ? "edit-form"
+            : "hidden-form"
+        }
+      >
+        <form id="edit-form" onSubmit={handleUpdate}>
           <textarea
             value={commentValue}
-            onChange={(e) => {
-              setCommentValue(e.target.value);
-              setTextArea(e.target.value);
-            }}
+            onChange={(e) => setCommentValue(e.target.value)}
             onBlur={() =>
-              textArea.length === 0 &&
+              commentValueDisabled &&
               setOPenForm({ commentId: null, replyId: null, type: null })
             }
             ref={textareaFocus}
           ></textarea>
-          <button onClick={handleUpdate} disabled={textAreaDisabled}>
+          <button className="solid-btn" disabled={commentValueDisabled}>
             Update
           </button>
-          <button onClick={handleCancel}>Cancel</button>
-        </div>
-      ) : (
-        <button onClick={() => handleEdit(content)}>Edit</button>
+        </form>
+        {/* ) : ( // <button onClick={handleCancel}>Cancel</button> */}
+      </div>
+      {openForm.commentId === commentId &&
+      openForm.replyId === replyId &&
+      openForm.type === type ? null : (
+        <button className="mini-btn" onClick={() => handleEdit(content)}>
+          Edit
+        </button>
       )}
     </>
   );
