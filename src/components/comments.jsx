@@ -22,30 +22,30 @@ export function Comments() {
         const { id, user, createdAt, content, replies } = comment;
         return (
           <div key={id} className="comment-wrapper">
-            <div className="mid-wrapper">
-              <article key={id} className="comment">
-                <div className="comment-info">
-                  <img src={user.image.png} alt="" />
-                  <a href="#">{user.username}</a> &nbsp;
-                  {createdAt.includes("ago") ? (
-                    <time>{createdAt}</time>
-                  ) : (
-                    <TimeAgo date={createdAt} live={false}></TimeAgo>
+            <CommentIdContext.Provider value={id}>
+              <div className="mid-wrapper">
+                <article key={id} className="comment">
+                  <div className="comment-info">
+                    <img src={user.image.png} alt="" />
+                    <a href="#">{user.username}</a> &nbsp;
+                    {createdAt.includes("ago") ? (
+                      <time>{createdAt}</time>
+                    ) : (
+                      <TimeAgo date={createdAt} live={false}></TimeAgo>
+                    )}
+                  </div>
+                  {openForm.commentId === id &&
+                  openForm.type === "EditForm" ? null : (
+                    <p>{content}</p>
                   )}
-                </div>
-                {openForm.commentId === id &&
-                openForm.type === "EditForm" ? null : (
-                  <p>{content}</p>
-                )}
-              </article>
-              <Scores
-                score={comment.score}
-                commentId={id}
-                username={user.username}
-              ></Scores>
-            </div>
-            <div className="comment-operations">
-              <CommentIdContext.Provider value={id}>
+                </article>
+                <Scores
+                  score={comment.score}
+                  commentId={id}
+                  username={user.username}
+                ></Scores>
+              </div>
+              <div className="comment-operations">
                 {user.username === currentUser.username && (
                   <div className="user-operations">
                     <EditComment
@@ -60,8 +60,8 @@ export function Comments() {
                   currentUser={currentUser}
                   replies={replies}
                 ></Replies>
-              </CommentIdContext.Provider>
-            </div>
+              </div>
+            </CommentIdContext.Provider>
           </div>
         );
       })}

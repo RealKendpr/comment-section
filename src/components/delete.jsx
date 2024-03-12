@@ -7,7 +7,7 @@ export function Delete({ username, replyId, isReply }) {
   const [confirmation, setConfirmation] = useState(false);
   const { comments, setComment } = useContext(CommentContext);
   const commentId = useContext(CommentIdContext);
-  console.log(commentId);
+
   const updateComment = comments.filter((c) => c.id !== commentId);
   const updateReplies = comments.map((c) =>
     c.id === commentId
