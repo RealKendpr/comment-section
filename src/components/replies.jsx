@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { InputForm } from "./InputForms";
 import { Scores } from "./score";
 import { EditComment } from "./editComment";
 import { Delete } from "./delete";
-import { Edit } from "./edit";
+import TimeAgo from "react-timeago";
 
 export function Replies({
   currentUser,
@@ -38,7 +37,13 @@ export function Replies({
                   <div>
                     <img src={user.image.png} alt="" />
                     <a href="#">{user.username}</a>
-                    <div>{createdAt}</div>
+                    <div>
+                      {createdAt.includes("ago") ? (
+                        <time>{createdAt}</time>
+                      ) : (
+                        <TimeAgo date={createdAt} live={false}></TimeAgo>
+                      )}
+                    </div>
                   </div>
                   <p>
                     <a href="#">{"@" + replyingTo}</a> &nbsp; {content}

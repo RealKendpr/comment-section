@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createReply, createComment } from "./api";
 import dataJson from "./data.json";
 
@@ -16,6 +16,7 @@ export function InputForm({
   const [textArea, setTextArea] = useState("");
 
   const textAreaDisabled = textArea.length < 40;
+  const textareaFocus = useRef(null);
   const newReply = createReply(textArea, commentUsername);
   const newComment = createComment(textArea);
 
@@ -40,6 +41,14 @@ export function InputForm({
   };
 
   const isCommentForm = type === "CommentForm";
+
+  useEffect(() => {
+    openForm.commentId === commentId &&
+    openForm.replyId === replyId &&
+    openForm.type === type
+      ? textareaFocus.current.focus()
+      : null;
+  }, [openForm]);
 
   return (
     <>
@@ -72,6 +81,7 @@ export function InputForm({
                 textArea.length === 0 &&
                 setOPenForm({ commentId: null, type: null })
               }
+              ref={textareaFocus}
             ></textarea>
             <button disabled={textAreaDisabled}>REPLY</button>
           </form>

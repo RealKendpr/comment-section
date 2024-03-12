@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function EditComment({
   comments,
@@ -29,7 +29,7 @@ export function EditComment({
     c.id === commentId
       ? {
           ...c,
-          createdAt: new Date().getDate(),
+          createdAt: new Date().toISOString(),
           content: commentValue,
         }
       : c
@@ -41,7 +41,11 @@ export function EditComment({
           ...c,
           replies: c.replies.map((r) =>
             r.id === replyId
-              ? { ...r, createdAt: new Date().getDate(), content: commentValue }
+              ? {
+                  ...r,
+                  createdAt: new Date().toISOString(),
+                  content: commentValue,
+                }
               : r
           ),
         }
@@ -58,9 +62,19 @@ export function EditComment({
     setOPenForm({ commentId: null, type: null });
   };
 
+  useEffect(() => {
+    openForm.commentId === commentId &&
+    openForm.replyId === replyId &&
+    openForm.type === type
+      ? textareaFocus.current.focus()
+      : null;
+  }, [openForm]);
+
   return (
     <>
-      {openForm.commentId === commentId && openForm.replyId === replyId ? (
+      {openForm.commentId === commentId &&
+      openForm.replyId === replyId &&
+      openForm.type === type ? (
         <div>
           <textarea
             value={commentValue}
@@ -70,7 +84,7 @@ export function EditComment({
             }}
             onBlur={() =>
               textArea.length === 0 &&
-              setOPenForm({ commentId: null, type: null })
+              setOPenForm({ commentId: null, replyId: null, type: null })
             }
             ref={textareaFocus}
           ></textarea>
@@ -80,16 +94,7 @@ export function EditComment({
           <button onClick={handleCancel}>Cancel</button>
         </div>
       ) : (
-        <button
-          onClick={() => {
-            handleEdit(content);
-            setTimeout(() => {
-              textareaFocus.current.focus();
-            }, 150);
-          }}
-        >
-          Edit
-        </button>
+        <button onClick={() => handleEdit(content)}>Edit</button>
       )}
     </>
   );

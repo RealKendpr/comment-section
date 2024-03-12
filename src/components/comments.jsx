@@ -5,7 +5,7 @@ import { Scores } from "./score";
 import { Delete } from "./delete";
 import { EditComment } from "./editComment";
 import { InputForm } from "./InputForms";
-// import { createComment as createCommentApi } from "./api";
+import TimeAgo from "react-timeago";
 
 export function Comments() {
   const currentUser = dataJson.currentUser;
@@ -36,8 +36,14 @@ export function Comments() {
                 <div className="comment">
                   <div className="comment-info">
                     <img src={user.image.png} alt="" />
-                    <a href="#">{user.username}</a>
-                    <div>{createdAt}</div>
+                    <a href="#">{user.username}</a> &nbsp;
+                    <div>
+                      {createdAt.includes("ago") ? (
+                        <time>{createdAt}</time>
+                      ) : (
+                        <TimeAgo date={createdAt} live={false}></TimeAgo>
+                      )}
+                    </div>
                   </div>
                   <p>{content}</p>
                 </div>
