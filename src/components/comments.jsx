@@ -25,8 +25,10 @@ export function Comments() {
             <CommentIdContext.Provider value={id}>
               <article key={id} className="comment">
                 <div className="comment-info">
-                  <img src={user.image.png} alt="" />
-                  <a href="#">{user.username}</a> &nbsp;
+                  <div className="img-wrapper">
+                    <img src={user.image.png} alt="" />
+                  </div>
+                  <a href="#">{user.username}</a>
                   {createdAt.includes("ago") ? (
                     <time>{createdAt}</time>
                   ) : (
