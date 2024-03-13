@@ -23,28 +23,26 @@ export function Comments() {
         return (
           <div key={id} className="comment-wrapper">
             <CommentIdContext.Provider value={id}>
-              <div className="mid-wrapper">
-                <article key={id} className="comment">
-                  <div className="comment-info">
-                    <img src={user.image.png} alt="" />
-                    <a href="#">{user.username}</a> &nbsp;
-                    {createdAt.includes("ago") ? (
-                      <time>{createdAt}</time>
-                    ) : (
-                      <TimeAgo date={createdAt} live={false}></TimeAgo>
-                    )}
-                  </div>
-                  {openForm.commentId === id &&
-                  openForm.type === "EditForm" ? null : (
-                    <p>{content}</p>
+              <article key={id} className="comment">
+                <div className="comment-info">
+                  <img src={user.image.png} alt="" />
+                  <a href="#">{user.username}</a> &nbsp;
+                  {createdAt.includes("ago") ? (
+                    <time>{createdAt}</time>
+                  ) : (
+                    <TimeAgo date={createdAt} live={false}></TimeAgo>
                   )}
-                </article>
-                <Scores
-                  score={comment.score}
-                  commentId={id}
-                  username={user.username}
-                ></Scores>
-              </div>
+                </div>
+                {openForm.commentId === id &&
+                openForm.type === "EditForm" ? null : (
+                  <p>{content}</p>
+                )}
+              </article>
+              <Scores
+                score={comment.score}
+                commentId={id}
+                username={user.username}
+              ></Scores>
               <div className="comment-operations">
                 {user.username === currentUser.username && (
                   <div className="user-operations">
