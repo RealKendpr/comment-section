@@ -26,12 +26,8 @@ export default function App() {
       <main className="comment-section">
         <CommentContext.Provider value={{ comments, setComment }}>
           <OpenFormContext.Provider value={{ openForm, setOPenForm }}>
-            <Comments openForm={openForm} setOPenForm={setOPenForm}></Comments>
-            <InputForm
-              openForm={openForm}
-              setOPenForm={setOPenForm}
-              type="CommentForm"
-            ></InputForm>
+            <Comments></Comments>
+            <InputForm type="CommentForm"></InputForm>
           </OpenFormContext.Provider>
         </CommentContext.Provider>
       </main>

@@ -10,57 +10,73 @@ import {
   CommentContext,
   OpenFormContext,
 } from "../context/context";
+import { Button } from "./buttons";
 
 export function Comments() {
   const currentUser = dataJson.currentUser;
 
   const { comments } = useContext(CommentContext);
-  const { openForm } = useContext(OpenFormContext);
+  const { openForm, setOPenForm } = useContext(OpenFormContext);
   return (
     <div className="comment-list">
       {comments.map((comment) => {
         const { id, user, createdAt, content, replies } = comment;
         return (
-          <div key={id} className="comment-wrapper">
+          <div key={id}>
             <CommentIdContext.Provider value={id}>
-              <article key={id} className="comment">
-                <div className="comment-info">
-                  <div className="img-wrapper">
-                    <img src={user.image.png} alt="" />
+              <div className="comment-wrapper">
+                <article key={id} className="comment">
+                  <div className="comment-info">
+                    <div className="img-wrapper">
+                      <img src={user.image.png} alt="" />
+                    </div>
+                    <a href="#">{user.username}</a>
+                    {createdAt.includes("ago") ? (
+                      <time>{createdAt}</time>
+                    ) : (
+                      <TimeAgo date={createdAt} live={false}></TimeAgo>
+                    )}
                   </div>
-                  <a href="#">{user.username}</a>
-                  {createdAt.includes("ago") ? (
-                    <time>{createdAt}</time>
-                  ) : (
-                    <TimeAgo date={createdAt} live={false}></TimeAgo>
+                  {openForm.commentId === id &&
+                  openForm.type === "EditForm" ? null : (
+                    <p>{content}</p>
                   )}
+                </article>
+                <Scores
+                  score={comment.score}
+                  commentId={id}
+                  username={user.username}
+                ></Scores>
+                <div className="comment-operations">
+                  {user.username === currentUser.username && (
+                    <div className="user-operations">
+                      <EditComment
+                        content={content}
+                        type="EditForm"
+                      ></EditComment>
+                      <Delete username={user.username}></Delete>
+                    </div>
+                  )}
+                  {openForm.commentId === id
+                    ? null
+                    : user.username !== currentUser.username && (
+                        <Button
+                          clickAction={() =>
+                            setOPenForm({
+                              commentId: id,
+                              type: "ReplyToComment",
+                            })
+                          }
+                          value="Reply"
+                        ></Button>
+                      )}
                 </div>
-                {openForm.commentId === id &&
-                openForm.type === "EditForm" ? null : (
-                  <p>{content}</p>
-                )}
-              </article>
-              <Scores
-                score={comment.score}
-                commentId={id}
-                username={user.username}
-              ></Scores>
-              <div className="comment-operations">
-                {user.username === currentUser.username && (
-                  <div className="user-operations">
-                    <EditComment
-                      content={content}
-                      type="EditForm"
-                    ></EditComment>
-                    <Delete username={user.username}></Delete>
-                  </div>
-                )}
-                <Replies
-                  commentUsername={user.username}
-                  currentUser={currentUser}
-                  replies={replies}
-                ></Replies>
               </div>
+              <Replies
+                commentUsername={user.username}
+                currentUser={currentUser}
+                replies={replies}
+              ></Replies>
             </CommentIdContext.Provider>
           </div>
         );

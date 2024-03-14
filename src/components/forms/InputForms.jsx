@@ -10,12 +10,13 @@ import {
 export function InputForm({ commentUsername, replyId, type }) {
   const currentUser = dataJson.currentUser;
   const [commentValue, setCommentValue] = useState("");
-  const textareaDisabled = commentValue.length === 0;
   const textareaFocus = useRef(null);
+
+  const textareaDisabled = commentValue.length === 0;
   const newReply = createReply(commentValue, commentUsername);
   const newComment = createComment(commentValue);
+
   const isCommentForm = type === "CommentForm";
-  
   const commentId = useContext(CommentIdContext);
   const { comments, setComment } = useContext(CommentContext);
   const { openForm, setOPenForm } = useContext(OpenFormContext);
@@ -28,7 +29,6 @@ export function InputForm({ commentUsername, replyId, type }) {
         }
       : c
   );
-
   const submitForm = (e) => {
     e.preventDefault();
     textareaDisabled === false
@@ -66,48 +66,58 @@ export function InputForm({ commentUsername, replyId, type }) {
             </button>
           </form>
         </div>
-      ) : (
-        <>
-          <div
-            className={
-              openForm.commentId === commentId &&
-              openForm.replyId === replyId &&
-              openForm.type === type
-                ? "reply-form"
-                : "hidden-form"
-            }
-            id={isCommentForm ? "ReplyToComment" : "ReplyToReply"}
-          >
-            <div>
-              <img src={currentUser.image.png} alt="" />
-            </div>
-            <form onSubmit={submitForm}>
-              <textarea
-                value={commentValue}
-                onChange={(e) => setCommentValue(e.target.value)}
-                onBlur={() =>
-                  textareaDisabled &&
-                  setOPenForm({ commentId: null, type: null })
-                }
-                ref={textareaFocus}
-              ></textarea>
-              <button className="solid-btn" disabled={textareaDisabled}>
-                REPLY
-              </button>
-            </form>
+      ) : type === "ReplyToComment" ? (
+        <div
+          className={
+            openForm.type === type && openForm.commentId === commentId
+              ? "reply-form"
+              : "hidden-form"
+          }
+          id={isCommentForm ? "ReplyToComment" : "ReplyToReply"}
+        >
+          <div>
+            <img src={currentUser.image.png} alt="" />
           </div>
-
-          {openForm.commentId === commentId &&
-          openForm.replyId === replyId &&
-          openForm.type === type ? null : (
-            <button
-              className="mini-btn"
-              onClick={() => setOPenForm({ commentId, replyId, type })}
-            >
-              Reply
+          <form onSubmit={submitForm}>
+            <textarea
+              value={commentValue}
+              onChange={(e) => setCommentValue(e.target.value)}
+              onBlur={() =>
+                textareaDisabled && setOPenForm({ commentId: null, type: null })
+              }
+              ref={textareaFocus}
+            ></textarea>
+            <button className="solid-btn" disabled={textareaDisabled}>
+              REPLY
             </button>
-          )}
-        </>
+          </form>
+        </div>
+      ) : (
+        <div
+          className={
+            openForm.type === type && openForm.replyId === replyId
+              ? "reply-form"
+              : "hidden-form"
+          }
+          id={isCommentForm ? "ReplyToComment" : "ReplyToReply"}
+        >
+          <div>
+            <img src={currentUser.image.png} alt="" />
+          </div>
+          <form onSubmit={submitForm}>
+            <textarea
+              value={commentValue}
+              onChange={(e) => setCommentValue(e.target.value)}
+              onBlur={() =>
+                textareaDisabled && setOPenForm({ commentId: null, type: null })
+              }
+              ref={textareaFocus}
+            ></textarea>
+            <button className="solid-btn" disabled={textareaDisabled}>
+              REPLY
+            </button>
+          </form>
+        </div>
       )}
     </>
   );
@@ -128,6 +138,6 @@ export function InputForm({ commentUsername, replyId, type }) {
 
 {
   /* {comment.replies.map((reply) => (
-        <div key={reply.id}>{reply.content}</div>
-      ))} */
+    <div key={reply.id}>{reply.content}</div>
+    ))} */
 }
