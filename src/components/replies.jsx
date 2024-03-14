@@ -64,7 +64,7 @@ export function Replies({ currentUser, replies, commentUsername }) {
                         ></Delete>
                       </div>
                     ) : null}
-                    {openForm.commentId === id ? null : (
+                    {openForm.replyId === id ? null : (
                       <Button
                         clickAction={() =>
                           setOPenForm({

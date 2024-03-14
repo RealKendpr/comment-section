@@ -24,7 +24,7 @@ export function Comments() {
         return (
           <div key={id}>
             <CommentIdContext.Provider value={id}>
-              <div className="comment-wrapper">
+              <div key={id} className="comment-wrapper">
                 <article key={id} className="comment">
                   <div className="comment-info">
                     <div className="img-wrapper">
@@ -57,19 +57,18 @@ export function Comments() {
                       <Delete username={user.username}></Delete>
                     </div>
                   )}
-                  {openForm.commentId === id
-                    ? null
-                    : user.username !== currentUser.username && (
-                        <Button
-                          clickAction={() =>
-                            setOPenForm({
-                              commentId: id,
-                              type: "ReplyToComment",
-                            })
-                          }
-                          value="Reply"
-                        ></Button>
-                      )}
+                  {user.username !== currentUser.username &&
+                  openForm.commentId !== id ? (
+                    <Button
+                      clickAction={() =>
+                        setOPenForm({
+                          commentId: id,
+                          type: "ReplyToComment",
+                        })
+                      }
+                      value="Reply"
+                    ></Button>
+                  ) : null}
                 </div>
               </div>
               <Replies
