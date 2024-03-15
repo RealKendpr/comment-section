@@ -56,6 +56,7 @@ export function InputForm({ commentUsername, replyId, type }) {
             <textarea
               id="comment-input"
               value={commentValue}
+              placeholder="Add a comment..."
               onChange={(e) => setCommentValue(e.target.value)}
               onFocus={() => setOPenForm({ commentId: null, type: null })}
             ></textarea>
@@ -79,6 +80,7 @@ export function InputForm({ commentUsername, replyId, type }) {
           <form onSubmit={submitForm}>
             <textarea
               value={commentValue}
+              placeholder="Add a reply..."
               onChange={(e) => setCommentValue(e.target.value)}
               onBlur={() =>
                 textareaDisabled && setOPenForm({ commentId: null, type: null })
@@ -106,6 +108,7 @@ export function InputForm({ commentUsername, replyId, type }) {
             <form onSubmit={submitForm}>
               <textarea
                 value={commentValue}
+                placeholder="Add a reply..."
                 onChange={(e) => setCommentValue(e.target.value)}
                 onBlur={() =>
                   textareaDisabled &&

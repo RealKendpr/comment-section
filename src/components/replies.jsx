@@ -1,15 +1,20 @@
 import { InputForm } from "./forms/InputForms";
 import { Scores } from "./score";
-import { EditComment } from "./forms/editComment";
+import { EditComment } from "./forms/editForms";
 import { Delete } from "./delete";
 import TimeAgo from "react-timeago";
 import { useContext } from "react";
-import { CommentIdContext, OpenFormContext } from "../context/context";
+import {
+  CommentIdContext,
+  OpenFormContext,
+  commentValueContext,
+} from "../context/context";
 import { Button } from "./buttons";
 
 export function Replies({ currentUser, replies, commentUsername }) {
   const { openForm, setOPenForm } = useContext(OpenFormContext);
   const { commentId } = useContext(CommentIdContext);
+  const { setCommentValue } = useContext(commentValueContext);
   return (
     <>
       {replies.length !== 0 && (
@@ -28,11 +33,21 @@ export function Replies({ currentUser, replies, commentUsername }) {
                       {createdAt.includes("ago") ? (
                         <time>{createdAt}</time>
                       ) : (
-                        <TimeAgo date={createdAt} live={false}></TimeAgo>
+                        <TimeAgo
+                          date={createdAt}
+                          live={false}
+                          suffix="ago"
+                        ></TimeAgo>
                       )}
                     </div>
-                    {openForm.replyId === id &&
-                    openForm.type === "EditForm" ? null : (
+                    {openForm.replyId === id && openForm.type === "EditForm" ? (
+                      <EditComment
+                        replyId={id}
+                        content={content}
+                        type="EditForm"
+                        isReply={true}
+                      ></EditComment>
+                    ) : (
                       <p>
                         <a href="#">{"@" + replyingTo}</a> &nbsp; {content}
                       </p>
@@ -48,12 +63,19 @@ export function Replies({ currentUser, replies, commentUsername }) {
                     {user.username === currentUser.username ? (
                       // <div className="user-operations">
                       <>
-                        <EditComment
-                          replyId={id}
-                          content={content}
-                          type="EditForm"
-                          isReply={true}
-                        ></EditComment>
+                        {openForm.replyId === id ? null : (
+                          <Button
+                            clickAction={() => {
+                              setCommentValue(content);
+                              setOPenForm({
+                                commentId: commentId,
+                                replyId: id,
+                                type: "EditForm",
+                              });
+                            }}
+                            value="Edit"
+                          ></Button>
+                        )}
                         <Delete
                           replyId={id}
                           username={user.username}
