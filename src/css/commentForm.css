@@ -1,0 +1,37 @@
+.user-comment-input {
+  position: fixed;
+  bottom: 32px;
+  left: 16px;
+  right: 16px;
+  border-radius: 8px;
+}
+
+.user-comment-input form {
+  padding: 1rem;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto;
+  grid-template-areas: "textarea textarea" "photo button";
+  row-gap: 14px;
+
+  & > div {
+    grid-area: photo;
+    width: 32px;
+  }
+  & textarea {
+    grid-area: textarea;
+    height: 94px;
+    padding: 15px 22px;
+    border: 1px solid;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: "Rubik", sans-serif;
+  }
+  & button {
+    grid-area: button;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-family: "Rubik", sans-serif;
+  }
+}

@@ -47,11 +47,6 @@
 .comment-section {
   padding-bottom: 200px;
 }
-.user-comment-input {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-}
 .scores {
   grid-area: scores;
   display: flex;
