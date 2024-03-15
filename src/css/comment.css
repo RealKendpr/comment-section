@@ -2,7 +2,9 @@
   margin: 32px 16px;
 }
 .comment-wrapper {
+  margin-bottom: 16px;
   padding: 16px;
+  border-radius: 8px;
   display: grid;
   row-gap: 20px;
   grid-template-rows: 1fr;
@@ -52,7 +54,29 @@
 }
 .scores {
   grid-area: scores;
+  display: flex;
+
+  & > * {
+    font-family: "Rubik", sans-serif;
+  }
 }
 .comment-operations {
   grid-area: comment-operation;
+  display: flex;
+  column-gap: 16px;
+
+  & button {
+    font-family: "Rubik", sans-serif;
+  }
+}
+.mini-btn {
+  display: flex;
+  align-items: center;
+
+  & img {
+    margin-right: 8px;
+  }
+}
+.reply-list {
+  margin-left: 16px;
 }

@@ -100,6 +100,7 @@ export function EditComment({ replyId, content, type, isReply }) {
       openForm.replyId === replyId &&
       openForm.type === type ? null : (
         <button className="mini-btn" onClick={() => handleEdit(content)}>
+          <img src="./assets/images/icons/icon-edit.svg" alt="" />
           Edit
         </button>
       )}

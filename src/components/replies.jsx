@@ -12,22 +12,18 @@ export function Replies({ currentUser, replies, commentUsername }) {
   const { commentId } = useContext(CommentIdContext);
   return (
     <>
-      {commentUsername !== currentUser.username && (
-        <InputForm
-          commentUsername={commentUsername}
-          type="ReplyToComment"
-        ></InputForm>
-      )}
       {replies.length !== 0 && (
-        <div className="replies">
+        <div className="reply-list">
           {replies.map((eachReply) => {
             const { id, content, createdAt, replyingTo, user } = eachReply;
             return (
               <div key={id}>
                 <div className="comment-wrapper">
-                  <article key={id} className="reply">
+                  <article key={id} className="comment">
                     <div className="comment-info">
-                      <img src={user.image.png} alt="" />
+                      <div className="img-wrapper">
+                        <img src={user.image.png} alt="" />
+                      </div>
                       <a href="#">{user.username}</a> &nbsp;
                       {createdAt.includes("ago") ? (
                         <time>{createdAt}</time>
@@ -50,7 +46,8 @@ export function Replies({ currentUser, replies, commentUsername }) {
                   ></Scores>
                   <div className="comment-operations">
                     {user.username === currentUser.username ? (
-                      <div className="user-operations">
+                      // <div className="user-operations">
+                      <>
                         <EditComment
                           replyId={id}
                           content={content}
@@ -62,8 +59,9 @@ export function Replies({ currentUser, replies, commentUsername }) {
                           username={user.username}
                           isReply={true}
                         ></Delete>
-                      </div>
-                    ) : null}
+                      </>
+                    ) : // </div>
+                    null}
                     {openForm.replyId === id ? null : (
                       <Button
                         clickAction={() =>

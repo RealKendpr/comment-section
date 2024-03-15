@@ -41,22 +41,20 @@ export function InputForm({ commentUsername, replyId, type }) {
   };
 
   useEffect(() => {
-    openForm.commentId === commentId &&
-    openForm.replyId === replyId &&
-    openForm.type === type
-      ? textareaFocus.current.focus()
-      : null;
+    // openForm.commentId === commentId && openForm.replyId === replyId &&
+    openForm.type === type ? textareaFocus.current.focus() : null;
   }, [openForm]);
 
   return (
     <>
       {isCommentForm ? (
         <div className="user-comment-input">
-          <div>
-            <img src={currentUser.image.png} alt="" />
-          </div>
           <form className="comment-form" onSubmit={submitForm}>
+            <div id="profile-photo">
+              <img src={currentUser.image.png} alt="" />
+            </div>
             <textarea
+              id="comment-input"
               value={commentValue}
               onChange={(e) => setCommentValue(e.target.value)}
               onFocus={() => setOPenForm({ commentId: null, type: null })}
@@ -93,31 +91,34 @@ export function InputForm({ commentUsername, replyId, type }) {
           </form>
         </div>
       ) : (
-        <div
-          className={
-            openForm.type === type && openForm.replyId === replyId
-              ? "reply-form"
-              : "hidden-form"
-          }
-          id={isCommentForm ? "ReplyToComment" : "ReplyToReply"}
-        >
-          <div>
-            <img src={currentUser.image.png} alt="" />
+        type === "ReplyToReply" && (
+          <div
+            className={
+              openForm.type === type && openForm.replyId === replyId
+                ? "reply-form"
+                : "hidden-form"
+            }
+            id={isCommentForm ? "ReplyToComment" : "ReplyToReply"}
+          >
+            <div>
+              <img src={currentUser.image.png} alt="" />
+            </div>
+            <form onSubmit={submitForm}>
+              <textarea
+                value={commentValue}
+                onChange={(e) => setCommentValue(e.target.value)}
+                onBlur={() =>
+                  textareaDisabled &&
+                  setOPenForm({ commentId: null, replyId: null, type: null })
+                }
+                ref={textareaFocus}
+              ></textarea>
+              <button className="solid-btn" disabled={textareaDisabled}>
+                REPLY
+              </button>
+            </form>
           </div>
-          <form onSubmit={submitForm}>
-            <textarea
-              value={commentValue}
-              onChange={(e) => setCommentValue(e.target.value)}
-              onBlur={() =>
-                textareaDisabled && setOPenForm({ commentId: null, type: null })
-              }
-              ref={textareaFocus}
-            ></textarea>
-            <button className="solid-btn" disabled={textareaDisabled}>
-              REPLY
-            </button>
-          </form>
-        </div>
+        )
       )}
     </>
   );

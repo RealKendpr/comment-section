@@ -5,6 +5,7 @@ import { Delete } from "./delete";
 import { EditComment } from "./forms/editComment";
 import TimeAgo from "react-timeago";
 import { useContext } from "react";
+import { InputForm } from "./forms/InputForms";
 import {
   CommentIdContext,
   CommentContext,
@@ -24,7 +25,7 @@ export function Comments() {
         return (
           <div key={id}>
             <CommentIdContext.Provider value={id}>
-              <div key={id} className="comment-wrapper">
+              <div className="comment-wrapper">
                 <article key={id} className="comment">
                   <div className="comment-info">
                     <div className="img-wrapper">
@@ -49,13 +50,15 @@ export function Comments() {
                 ></Scores>
                 <div className="comment-operations">
                   {user.username === currentUser.username && (
-                    <div className="user-operations">
+                    // <div className="user-operations">
+                    <>
                       <EditComment
                         content={content}
                         type="EditForm"
                       ></EditComment>
                       <Delete username={user.username}></Delete>
-                    </div>
+                    </>
+                    // </div>
                   )}
                   {user.username !== currentUser.username &&
                   openForm.commentId !== id ? (
@@ -71,6 +74,12 @@ export function Comments() {
                   ) : null}
                 </div>
               </div>
+              {user.username !== currentUser.username && (
+                <InputForm
+                  commentUsername={user.username}
+                  type="ReplyToComment"
+                ></InputForm>
+              )}
               <Replies
                 commentUsername={user.username}
                 currentUser={currentUser}

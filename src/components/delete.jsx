@@ -55,6 +55,7 @@ export function Delete({ username, replyId, isReply }) {
               className="delete-btn mini-btn"
               onClick={() => setConfirmation(true)}
             >
+              <img src="./assets/images/icons/icon-delete.svg" alt="" />
               Delete
             </button>
           )}
