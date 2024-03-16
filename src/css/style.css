@@ -30,7 +30,6 @@ form {
     font-family: "Rubik", sans-serif;
   }
 }
-
 .hidden-form {
   display: none;
   /* visibility: hidden; */
@@ -38,4 +37,25 @@ form {
 .img-wrapper {
   width: 32px;
   aspect-ratio: 1 / 1;
+}
+.replyingTo {
+  font-weight: 500;
+}
+.username {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  & > a {
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: "Rubik", sans-serif;
+  }
+
+  & span {
+    padding: 5px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-family: "Rubik", sans-serif;
+  }
 }

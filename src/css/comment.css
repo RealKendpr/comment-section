@@ -27,12 +27,6 @@
   align-items: center;
   column-gap: 1rem;
 
-  & > a {
-    font-size: 1rem;
-    font-weight: 500;
-    font-family: "Rubik", sans-serif;
-  }
-
   & > time {
     font-size: 1rem;
     font-family: "Rubik", sans-serif;

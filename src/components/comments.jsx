@@ -36,7 +36,12 @@ export function Comments() {
                       <div className="img-wrapper">
                         <img src={user.image.png} alt="" />
                       </div>
-                      <a href="#">{user.username}</a>
+                      <div className="username">
+                        <a href="#">{user.username}</a>
+                        {user.username === currentUser.username && (
+                          <span>you</span>
+                        )}
+                      </div>
                       {createdAt.includes("ago") ? (
                         <time>{createdAt}</time>
                       ) : (
