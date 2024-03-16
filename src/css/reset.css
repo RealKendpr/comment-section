@@ -17,11 +17,13 @@ ul {
 a {
   text-decoration: none;
 }
-input,
 textarea,
 button {
   border: none;
   outline: none;
+}
+textarea {
+  resize: none;
 }
 img,
 svg,

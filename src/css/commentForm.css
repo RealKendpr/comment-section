@@ -20,7 +20,6 @@
   }
   & textarea {
     grid-area: textarea;
-    height: 94px;
   }
   & button {
     grid-area: button;
