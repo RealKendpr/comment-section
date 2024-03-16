@@ -1,0 +1,29 @@
+.delete-wrapper {
+  min-height: 100svh;
+  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  display: grid;
+  place-items: center;
+}
+.delete-confirmation {
+  margin-inline: 1rem;
+  display: grid;
+  gap: 23px;
+
+  & p#delete-title {
+    font-size: 1.21rem;
+  }
+  & p {
+    line-height: 1.5;
+    font-family: "Rubik", sans-serif;
+  }
+}
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}

@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import dataJson from "../data/data.json";
+import "../css/confirmDelete.css";
 import { CommentIdContext, CommentContext } from "../context/context";
 const currentUser = dataJson.currentUser;
 
@@ -34,20 +35,22 @@ export function Delete({ username, replyId, isReply }) {
         <>
           {confirmation === true ? (
             <div className="delete-wrapper">
-              <div className="delete-confirmation">
-                <p>
-                  <b>Delete Comment</b>
+              <div className="card delete-confirmation">
+                <p id="delete-title">
+                  <strong>Delete Comment</strong>
                 </p>
                 <p>
                   Are you sure you want to delete this comment? This will remove
                   the comment and can't be undone.
                 </p>
-                <button className="solid-btn grey-btn" onClick={handleCancel}>
-                  NO, CANCEL
-                </button>
-                <button className="solid-btn red-btn" onClick={handleConfirm}>
-                  YES, DELETE
-                </button>
+                <div className="actions">
+                  <button className="solid-btn grey-btn" onClick={handleCancel}>
+                    NO, CANCEL
+                  </button>
+                  <button className="solid-btn red-btn" onClick={handleConfirm}>
+                    YES, DELETE
+                  </button>
+                </div>
               </div>
             </div>
           ) : (

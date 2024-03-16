@@ -1,9 +1,12 @@
+strong {
+  font-weight: 700;
+}
 .card {
   padding: 16px;
   border-radius: 8px;
 }
 .solid-btn {
-  padding: 15px 30px;
+  padding: 15px 25px;
   border-radius: 8px;
   font-size: 1rem;
   font-weight: 500;
@@ -31,17 +34,6 @@ form {
 .hidden-form {
   display: none;
   /* visibility: hidden; */
-}
-.delete-wrapper {
-  min-height: 100svh;
-  width: 100%;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 100;
-  display: grid;
-  place-items: center;
 }
 .img-wrapper {
   width: 32px;
