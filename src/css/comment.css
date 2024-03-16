@@ -3,8 +3,6 @@
 }
 .comment-wrapper {
   margin-bottom: 16px;
-  padding: 16px;
-  border-radius: 8px;
   display: grid;
   row-gap: 20px;
   grid-template-rows: 1fr;
@@ -40,10 +38,7 @@
     font-family: "Rubik", sans-serif;
   }
 }
-.img-wrapper {
-  width: 32px;
-  aspect-ratio: 1 / 1;
-}
+
 .comment-section {
   padding-bottom: 200px;
 }
@@ -62,14 +57,6 @@
 
   & button {
     font-family: "Rubik", sans-serif;
-  }
-}
-.mini-btn {
-  display: flex;
-  align-items: center;
-
-  & img {
-    margin-right: 8px;
   }
 }
 .reply-list {

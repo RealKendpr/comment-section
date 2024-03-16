@@ -1,6 +1,6 @@
 import { InputForm } from "./forms/InputForms";
 import { Scores } from "./score";
-import { EditComment } from "./forms/editForms";
+import { EditForms } from "./forms/editForms";
 import { Delete } from "./delete";
 import TimeAgo from "react-timeago";
 import { useContext } from "react";
@@ -11,7 +11,7 @@ import {
 } from "../context/context";
 import { Button } from "./buttons";
 
-export function Replies({ currentUser, replies, commentUsername }) {
+export function Replies({ currentUser, replies }) {
   const { openForm, setOPenForm } = useContext(OpenFormContext);
   const { commentId } = useContext(CommentIdContext);
   const { setCommentValue } = useContext(commentValueContext);
@@ -23,7 +23,7 @@ export function Replies({ currentUser, replies, commentUsername }) {
             const { id, content, createdAt, replyingTo, user } = eachReply;
             return (
               <div key={id}>
-                <div className="comment-wrapper">
+                <div className="card comment-wrapper">
                   <article key={id} className="comment">
                     <div className="comment-info">
                       <div className="img-wrapper">
@@ -41,12 +41,12 @@ export function Replies({ currentUser, replies, commentUsername }) {
                       )}
                     </div>
                     {openForm.replyId === id && openForm.type === "EditForm" ? (
-                      <EditComment
+                      <EditForms
                         replyId={id}
                         content={content}
                         type="EditForm"
                         isReply={true}
-                      ></EditComment>
+                      ></EditForms>
                     ) : (
                       <p>
                         <a href="#">{"@" + replyingTo}</a> &nbsp; {content}

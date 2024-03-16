@@ -2,7 +2,7 @@ import dataJson from "../data/data.json";
 import { Replies } from "./replies";
 import { Scores } from "./score";
 import { Delete } from "./delete";
-import { EditComment } from "./forms/editForms";
+import { EditForms } from "./forms/editForms";
 import TimeAgo from "react-timeago";
 import { useState, useContext } from "react";
 import { InputForm } from "./forms/InputForms";
@@ -30,7 +30,7 @@ export function Comments() {
               <commentValueContext.Provider
                 value={{ commentValue, setCommentValue }}
               >
-                <div className="comment-wrapper">
+                <div className="card comment-wrapper">
                   <article key={id} className="comment">
                     <div className="comment-info">
                       <div className="img-wrapper">
@@ -49,10 +49,7 @@ export function Comments() {
                     </div>
                     {openForm.commentId === id &&
                     openForm.type === "EditForm" ? (
-                      <EditComment
-                        content={content}
-                        type="EditForm"
-                      ></EditComment>
+                      <EditForms content={content} type="EditForm"></EditForms>
                     ) : (
                       <p>{content}</p>
                     )}
@@ -72,7 +69,6 @@ export function Comments() {
                               setCommentValue(content);
                               setOPenForm({
                                 commentId: id,
-                                replyId: null,
                                 type: "EditForm",
                               });
                             }}
@@ -83,8 +79,9 @@ export function Comments() {
                       </>
                       // </div>
                     )}
-                    {user.username !== currentUser.username &&
-                    openForm.commentId === id ? null : (
+                    {user.username ===
+                    currentUser.username ? null : openForm.commentId ===
+                      id ? null : (
                       <Button
                         clickAction={() =>
                           setOPenForm({
@@ -103,11 +100,7 @@ export function Comments() {
                     type="ReplyToComment"
                   ></InputForm>
                 )}
-                <Replies
-                  commentUsername={user.username}
-                  currentUser={currentUser}
-                  replies={replies}
-                ></Replies>
+                <Replies currentUser={currentUser} replies={replies}></Replies>
               </commentValueContext.Provider>
             </CommentIdContext.Provider>
           </div>

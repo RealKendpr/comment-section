@@ -1,0 +1,47 @@
+.card {
+  padding: 16px;
+  border-radius: 8px;
+}
+.solid-btn {
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: "Rubik", sans-serif;
+}
+.mini-btn {
+  display: flex;
+  align-items: center;
+
+  & img {
+    margin-right: 8px;
+  }
+}
+form {
+  & textarea {
+    padding: 12px 18px;
+    border: 1px solid;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: "Rubik", sans-serif;
+  }
+}
+
+.hidden-form {
+  display: none;
+}
+.delete-wrapper {
+  min-height: 100svh;
+  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  display: grid;
+  place-items: center;
+}
+.img-wrapper {
+  width: 32px;
+  aspect-ratio: 1 / 1;
+}

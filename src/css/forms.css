@@ -1,0 +1,31 @@
+.reply-form {
+  margin-bottom: 16px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  background-color: aliceblue;
+
+  & form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    & button {
+      place-self: end;
+    }
+  }
+}
+
+.edit-form {
+  width: 100%;
+
+  & form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    
+    & button {
+      place-self: end;
+    }
+  }
+}

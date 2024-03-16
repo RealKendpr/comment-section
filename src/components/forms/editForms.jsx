@@ -6,7 +6,7 @@ import {
   commentValueContext,
 } from "../../context/context";
 
-export function EditComment({ replyId, type, isReply }) {
+export function EditForms({ replyId, type, isReply }) {
   const { commentValue, setCommentValue } = useContext(commentValueContext);
   const commentValueDisabled = commentValue.length === 0;
   const textareaFocus = useRef(null);

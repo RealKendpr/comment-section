@@ -50,7 +50,7 @@ export function InputForm({ commentUsername, replyId, type }) {
       {isCommentForm ? (
         <div className="user-comment-input">
           <form className="comment-form" onSubmit={submitForm}>
-            <div id="profile-photo">
+            <div className="img-wrapper">
               <img src={currentUser.image.png} alt="" />
             </div>
             <textarea
@@ -67,14 +67,16 @@ export function InputForm({ commentUsername, replyId, type }) {
         </div>
       ) : type === "ReplyToComment" ? (
         <div
-          className={
-            openForm.type === type && openForm.commentId === commentId
+          className=// "card reply-form"
+          {
+            "card " +
+            (openForm.type === type && openForm.commentId === commentId
               ? "reply-form"
-              : "hidden-form"
+              : "hidden-form")
           }
-          id={isCommentForm ? "ReplyToComment" : "ReplyToReply"}
+          id="ReplyToComment"
         >
-          <div>
+          <div className="img-wrapper">
             <img src={currentUser.image.png} alt="" />
           </div>
           <form onSubmit={submitForm}>
@@ -96,11 +98,12 @@ export function InputForm({ commentUsername, replyId, type }) {
         type === "ReplyToReply" && (
           <div
             className={
-              openForm.type === type && openForm.replyId === replyId
+              "card " +
+              (openForm.type === type && openForm.replyId === replyId
                 ? "reply-form"
-                : "hidden-form"
+                : "hidden-form")
             }
-            id={isCommentForm ? "ReplyToComment" : "ReplyToReply"}
+            id="ReplyToReply"
           >
             <div>
               <img src={currentUser.image.png} alt="" />
