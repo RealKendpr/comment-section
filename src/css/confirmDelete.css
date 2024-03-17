@@ -21,17 +21,31 @@
   gap: 23px;
 
   & p#delete-title {
+    color: var(--neutral-900);
     font-size: 1.21rem;
   }
   & p {
     line-height: 1.5;
-    font-family: "Rubik", sans-serif;
+    font-family: var(--font-family);
+  }
+  & p:not(#delete-title) {
+    color: var(--neutral-400);
   }
 }
 .actions {
   display: flex;
   gap: 12px;
   justify-content: space-between;
+
+  & button {
+    padding-inline: 23px !important;
+  }
+  & .grey-btn {
+    background: var(--neutral-400);
+  }
+  & .red-btn {
+    background: var(--primary-red);
+  }
 }
 .hidden-dialog {
   visibility: hidden;

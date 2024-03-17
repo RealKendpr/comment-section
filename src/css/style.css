@@ -1,16 +1,22 @@
+body {
+  background: var(--neutral-200);
+}
 strong {
   font-weight: 700;
 }
 .card {
   padding: 16px;
   border-radius: 8px;
+  background: var(--neutral-100);
 }
 .solid-btn {
-  padding: 15px 25px;
+  padding: 15px 30px;
   border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 500;
-  font-family: "Rubik", sans-serif;
+  background: var(--primary-default);
+  color: var(--neutral-100) !important;
+  font-size: var(--body-font-size);
+  font-weight: var(--bold-wght);
+  font-family: var(--font-family);
 }
 .mini-btn {
   display: flex;
@@ -20,12 +26,17 @@ strong {
     margin-right: 8px;
   }
 }
+.delete-btn {
+  color: var(--primary-red) !important;
+}
 form {
   & textarea {
     padding: 12px 18px;
-    border: 1px solid;
+    border: 1px solid var(--neutral-400);
     border-radius: 8px;
     min-height: 94px;
+    color: var(--neutral-500);
+    background: var(--neutral-100);
     font-size: 1rem;
     font-family: "Rubik", sans-serif;
   }
@@ -40,6 +51,7 @@ form {
 }
 .replyingTo {
   font-weight: 500;
+  color: var(--primary-default);
 }
 .username {
   display: flex;
@@ -48,17 +60,31 @@ form {
 
   & > a {
     font-size: 1rem;
-    font-weight: 500;
-    font-family: "Rubik", sans-serif;
+    font-weight: var(--semibold-wght);
+    font-family: var(--font-family);
+    color: var(--neutral-900);
   }
 
   & span {
-    padding: 5px;
-    font-size: 0.9rem;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--neutral-100);
+    background: var(--primary-default);
+    font-size: 0.8rem;
     font-weight: 500;
-    font-family: "Rubik", sans-serif;
+    font-family: var(--font-family);
   }
 }
 dialog {
   border: 0;
+}
+dialog::backdrop {
+  background: black;
+}
+button:hover {
+  cursor: pointer;
+}
+.mini-btn-wrapper {
+  display: flex;
+  align-items: center;
 }

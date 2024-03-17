@@ -48,15 +48,14 @@ export function Scores({ score, replyId, username, type }) {
   };
 
   return (
-    <div className="scores">
+    <span className="scores">
       <button onClick={add}>
         <img src="./assets/images/icons/icon-plus.svg" alt="" />
       </button>
       <span>{score}</span>
       <button onClick={minus}>
-        {" "}
         <img src="./assets/images/icons/icon-minus.svg" alt="" />
       </button>
-    </div>
+    </span>
   );
 }

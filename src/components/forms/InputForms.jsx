@@ -48,7 +48,7 @@ export function InputForm({ commentUsername, replyId, type }) {
   return (
     <>
       {isCommentForm ? (
-        <div className="user-comment-input">
+        <div className="card user-comment-input">
           <form className="comment-form" onSubmit={submitForm}>
             <div className="img-wrapper">
               <img src={currentUser.image.png} alt="" />
@@ -61,14 +61,14 @@ export function InputForm({ commentUsername, replyId, type }) {
               onFocus={() => setOPenForm({ commentId: null, type: null })}
             ></textarea>
             <button className="solid-btn" disabled={textareaDisabled}>
-              Send
+              SEND
             </button>
           </form>
         </div>
       ) : type === "ReplyToComment" ? (
         <div
-          className=// "card reply-form"
-          {
+          className={
+            // "card reply-form"
             "card " +
             (openForm.type === type && openForm.commentId === commentId
               ? "reply-form"

@@ -1,5 +1,6 @@
 .comment-list {
-  margin: 32px 16px;
+  margin: 32px auto;
+  width: 91%;
 }
 .comment-wrapper {
   margin-bottom: 16px;
@@ -18,7 +19,8 @@
   & > p {
     font-size: 1rem;
     line-height: 1.5;
-    font-family: "Rubik", sans-serif;
+    font-family: var(--font-family);
+    color: var(--neutral-400);
   }
 }
 .comment-info {
@@ -29,7 +31,8 @@
 
   & > time {
     font-size: 1rem;
-    font-family: "Rubik", sans-serif;
+    font-family: var(--font-family);
+    color: var(--neutral-400);
   }
 }
 
@@ -39,9 +42,20 @@
 .scores {
   grid-area: scores;
   display: flex;
+  align-items: center;
+  width: max-content;
+  border-radius: 10px;
+  background: var(--neutral-200);
 
   & > * {
-    font-family: "Rubik", sans-serif;
+    font-family: var(--font-family);
+  }
+  & span {
+    font-weight: var(--semibold-wght);
+    color: var(--primary-default);
+  }
+  & button {
+    padding: 14px;
   }
 }
 .comment-operations {
@@ -50,7 +64,9 @@
   column-gap: 16px;
 
   & button {
-    font-family: "Rubik", sans-serif;
+    color: var(--primary-default);
+    font-weight: var(--semibold-wght);
+    font-family: var(--font-family);
   }
 }
 .reply-list {

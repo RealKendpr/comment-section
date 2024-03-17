@@ -68,6 +68,7 @@ export function Comments() {
                     {user.username === currentUser.username && (
                       // <div className="user-operations">
                       <>
+                        <Delete username={user.username}></Delete>
                         {openForm.commentId === id ? null : (
                           <Button
                             clickAction={() => {
@@ -80,7 +81,6 @@ export function Comments() {
                             value="Edit"
                           ></Button>
                         )}
-                        <Delete username={user.username}></Delete>
                       </>
                       // </div>
                     )}

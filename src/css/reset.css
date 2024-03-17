@@ -21,6 +21,7 @@ textarea,
 button {
   border: none;
   outline: none;
+  background-color: transparent;
 }
 textarea {
   resize: none;

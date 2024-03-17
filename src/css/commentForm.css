@@ -3,11 +3,9 @@
   bottom: 32px;
   left: 16px;
   right: 16px;
-  border-radius: 8px;
 }
 
 .user-comment-input form {
-  padding: 1rem;
   display: grid;
   align-items: center;
   grid-template-columns: 1fr auto;

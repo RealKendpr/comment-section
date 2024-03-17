@@ -1,13 +1,18 @@
 import { useContext, useState } from "react";
 import dataJson from "../data/data.json";
 import "../css/confirmDelete.css";
-import { CommentIdContext, CommentContext } from "../context/context";
+import {
+  OpenFormContext,
+  CommentIdContext,
+  CommentContext,
+} from "../context/context";
 const currentUser = dataJson.currentUser;
 
 export function Delete({ username, replyId, isReply }) {
   const [confirmation, setConfirmation] = useState(false);
   const { comments, setComment } = useContext(CommentContext);
   const commentId = useContext(CommentIdContext);
+  const { openForm, setOPenForm } = useContext(OpenFormContext);
 
   const updateComment = comments.filter((c) => c.id !== commentId);
   const updateReplies = comments.map((c) =>
@@ -15,6 +20,11 @@ export function Delete({ username, replyId, isReply }) {
       ? { ...c, replies: c.replies.filter((r) => r.id !== replyId) }
       : c
   );
+
+  const toggleConfirmation = () => {
+    setConfirmation(true);
+    setOPenForm({ commentId: null, replyId: null, type: null });
+  };
 
   const handleCancel = () => {
     setConfirmation(false);
@@ -59,13 +69,15 @@ export function Delete({ username, replyId, isReply }) {
           </dialog>
           {/* </div> */}
           {confirmation ? null : (
-            <button
-              className="delete-btn mini-btn"
-              onClick={() => setConfirmation(true)}
-            >
-              <img src="./assets/images/icons/icon-delete.svg" alt="" />
-              Delete
-            </button>
+            <div className="mini-btn-wrapper">
+              <button
+                className="delete-btn mini-btn"
+                onClick={toggleConfirmation}
+              >
+                <img src="./assets/images/icons/icon-delete.svg" alt="" />
+                Delete
+              </button>
+            </div>
           )}
         </>
       ) : null}

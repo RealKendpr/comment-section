@@ -55,9 +55,9 @@ export function Replies({ currentUser, replies }) {
                     ) : (
                       <p>
                         <a className="replyingTo" href="#">
-                          {"@" + replyingTo}
-                        </a>{" "}
-                        &nbsp; {content}
+                          {"@" + replyingTo + " "}
+                        </a>
+                        {content}
                       </p>
                     )}
                   </article>
@@ -71,6 +71,11 @@ export function Replies({ currentUser, replies }) {
                     {user.username === currentUser.username ? (
                       // <div className="user-operations">
                       <>
+                        <Delete
+                          replyId={id}
+                          username={user.username}
+                          isReply={true}
+                        ></Delete>
                         {openForm.replyId === id ? null : (
                           <Button
                             clickAction={() => {
@@ -84,15 +89,9 @@ export function Replies({ currentUser, replies }) {
                             value="Edit"
                           ></Button>
                         )}
-                        <Delete
-                          replyId={id}
-                          username={user.username}
-                          isReply={true}
-                        ></Delete>
                       </>
                     ) : // </div>
-                    null}
-                    {openForm.replyId === id ? null : (
+                    openForm.replyId === id ? null : (
                       <Button
                         clickAction={() =>
                           setOPenForm({
