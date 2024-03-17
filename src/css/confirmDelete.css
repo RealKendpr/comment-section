@@ -10,7 +10,13 @@
   place-items: center;
 }
 .delete-confirmation {
-  margin-inline: 1rem;
+  width: calc(100% - 2rem);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* margin-inline: 1rem; */
+  z-index: 100;
   display: grid;
   gap: 23px;
 
@@ -26,4 +32,13 @@
   display: flex;
   gap: 12px;
   justify-content: space-between;
+}
+.hidden-dialog {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+.visible-dialog {
+  visibility: visible;
+  opacity: 1;
 }

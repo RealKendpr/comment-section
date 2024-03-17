@@ -33,27 +33,32 @@ export function Delete({ username, replyId, isReply }) {
     <>
       {username === currentUser.username ? (
         <>
-          {confirmation === true ? (
-            <div className="delete-wrapper">
-              <div className="card delete-confirmation">
-                <p id="delete-title">
-                  <strong>Delete Comment</strong>
-                </p>
-                <p>
-                  Are you sure you want to delete this comment? This will remove
-                  the comment and can't be undone.
-                </p>
-                <div className="actions">
-                  <button className="solid-btn grey-btn" onClick={handleCancel}>
-                    NO, CANCEL
-                  </button>
-                  <button className="solid-btn red-btn" onClick={handleConfirm}>
-                    YES, DELETE
-                  </button>
-                </div>
-              </div>
+          {/* <div className="delete-wrapper " > */}
+          <dialog
+            className={
+              confirmation === true
+                ? "card delete-confirmation " + "visible-dialog"
+                : "hidden-dialog"
+            }
+          >
+            <p id="delete-title">
+              <strong>Delete Comment</strong>
+            </p>
+            <p>
+              Are you sure you want to delete this comment? This will remove the
+              comment and can't be undone.
+            </p>
+            <div className="actions">
+              <button className="solid-btn grey-btn" onClick={handleCancel}>
+                NO, CANCEL
+              </button>
+              <button className="solid-btn red-btn" onClick={handleConfirm}>
+                YES, DELETE
+              </button>
             </div>
-          ) : (
+          </dialog>
+          {/* </div> */}
+          {confirmation ? null : (
             <button
               className="delete-btn mini-btn"
               onClick={() => setConfirmation(true)}
