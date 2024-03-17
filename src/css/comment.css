@@ -8,12 +8,11 @@
   grid-template-rows: 1fr;
   grid-template-columns: 1fr auto;
   grid-template-areas:
+    "comment-info comment-info"
     "comment comment"
     "scores comment-operation";
 }
 .comment {
-  display: grid;
-  gap: 21px;
   grid-area: comment;
 
   & > p {
@@ -26,6 +25,7 @@
   display: flex;
   align-items: center;
   column-gap: 1rem;
+  grid-area: comment-info;
 
   & > time {
     font-size: 1rem;

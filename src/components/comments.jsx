@@ -31,27 +31,27 @@ export function Comments() {
                 value={{ commentValue, setCommentValue }}
               >
                 <div className="card comment-wrapper">
-                  <article key={id} className="comment">
-                    <div className="comment-info">
-                      <div className="img-wrapper">
-                        <img src={user.image.png} alt="" />
-                      </div>
-                      <div className="username">
-                        <a href="#">{user.username}</a>
-                        {user.username === currentUser.username && (
-                          <span>you</span>
-                        )}
-                      </div>
-                      {createdAt.includes("ago") ? (
-                        <time>{createdAt}</time>
-                      ) : (
-                        <TimeAgo
-                          date={createdAt}
-                          live={false}
-                          suffix="ago"
-                        ></TimeAgo>
+                  <div className="comment-info">
+                    <div className="img-wrapper">
+                      <img src={user.image.png} alt="" />
+                    </div>
+                    <div className="username">
+                      <a href="#">{user.username}</a>
+                      {user.username === currentUser.username && (
+                        <span>you</span>
                       )}
                     </div>
+                    {createdAt.includes("ago") ? (
+                      <time>{createdAt}</time>
+                    ) : (
+                      <TimeAgo
+                        date={createdAt}
+                        live={false}
+                        suffix="ago"
+                      ></TimeAgo>
+                    )}
+                  </div>
+                  <article key={id} className="comment">
                     {openForm.commentId === id &&
                     openForm.type === "EditForm" ? (
                       <EditForms content={content} type="EditForm"></EditForms>
