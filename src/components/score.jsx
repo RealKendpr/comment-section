@@ -49,11 +49,11 @@ export function Scores({ score, replyId, username, type }) {
 
   return (
     <span className="scores">
-      <button onClick={add}>
+      <button title="add score" onClick={add}>
         <img src="./assets/images/icons/icon-plus.svg" alt="" />
       </button>
       <span>{score}</span>
-      <button onClick={minus}>
+      <button title="minus score" onClick={minus}>
         <img src="./assets/images/icons/icon-minus.svg" alt="" />
       </button>
     </span>

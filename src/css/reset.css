@@ -20,7 +20,7 @@ a {
 textarea,
 button {
   border: none;
-  outline: none;
+  /* outline: none; */
   background-color: transparent;
 }
 textarea {

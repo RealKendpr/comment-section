@@ -62,6 +62,8 @@ export function Delete({ username, replyId, isReply }) {
                 : "hidden-dialog"
             }
             ref={ref}
+            tabIndex={0}
+            aria-label="Delete Comment"
           >
             <p id="delete-title">
               <strong>Delete Comment</strong>

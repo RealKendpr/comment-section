@@ -60,6 +60,9 @@ export function InputForm({ commentUsername, replyId, type }) {
               onChange={(e) => setCommentValue(e.target.value)}
               onFocus={() => setOPenForm({ commentId: null, type: null })}
             ></textarea>
+            <label htmlFor="comment-input" className="hidden">
+              Add Comment
+            </label>
             <button className="solid-btn" disabled={textareaDisabled}>
               SEND
             </button>
