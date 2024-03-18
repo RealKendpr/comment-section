@@ -42,6 +42,12 @@ export function Delete({ username, replyId, isReply }) {
 
   useEffect(() => {
     confirmation ? ref.current?.showModal() : ref.current?.close();
+    const keyPress = (e) => {
+      e.key === "Escape" && setConfirmation(false);
+    };
+    confirmation
+      ? document.addEventListener("keydown", keyPress)
+      : document.removeEventListener("keydown", keyPress);
   }, [confirmation]);
 
   return (
