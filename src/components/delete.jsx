@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import dataJson from "../data/data.json";
 import "../css/confirmDelete.css";
 import {
@@ -12,7 +12,8 @@ export function Delete({ username, replyId, isReply }) {
   const [confirmation, setConfirmation] = useState(false);
   const { comments, setComment } = useContext(CommentContext);
   const commentId = useContext(CommentIdContext);
-  const { openForm, setOPenForm } = useContext(OpenFormContext);
+  const { setOPenForm } = useContext(OpenFormContext);
+  const ref = useRef();
 
   const updateComment = comments.filter((c) => c.id !== commentId);
   const updateReplies = comments.map((c) =>
@@ -39,6 +40,10 @@ export function Delete({ username, replyId, isReply }) {
     setConfirmation(false);
   };
 
+  useEffect(() => {
+    confirmation ? ref.current?.showModal() : ref.current?.close();
+  }, [confirmation]);
+
   return (
     <>
       {username === currentUser.username ? (
@@ -50,6 +55,7 @@ export function Delete({ username, replyId, isReply }) {
                 ? "card delete-confirmation " + "visible-dialog"
                 : "hidden-dialog"
             }
+            ref={ref}
           >
             <p id="delete-title">
               <strong>Delete Comment</strong>

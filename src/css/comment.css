@@ -53,6 +53,7 @@
   & span {
     font-weight: var(--semibold-wght);
     color: var(--primary-default);
+    user-select: none;
   }
   & button {
     padding: 14px;

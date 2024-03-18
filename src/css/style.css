@@ -48,6 +48,11 @@ form {
 .img-wrapper {
   width: 32px;
   aspect-ratio: 1 / 1;
+
+  & img {
+    user-select: none;
+    pointer-events: none;
+  }
 }
 .replyingTo {
   font-weight: 500;
@@ -73,13 +78,15 @@ form {
     font-size: 0.8rem;
     font-weight: 500;
     font-family: var(--font-family);
+    user-select: none;
   }
 }
 dialog {
   border: 0;
 }
 dialog::backdrop {
-  background: black;
+  background: var(--neutral-900);
+  opacity: 0.5;
 }
 button:hover {
   cursor: pointer;
