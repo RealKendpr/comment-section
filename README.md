@@ -57,7 +57,6 @@ I learned about so many things about react
 - React hooks and states
 -  -->
 
-s
 
 ### Continued development
 
