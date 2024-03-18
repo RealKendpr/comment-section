@@ -102,3 +102,8 @@ button:hover {
   font-size: 0;
   overflow: hidden;
 }
+@media (width >= 769px) {
+  .card {
+    padding: 22px;
+  }
+}

@@ -1,4 +1,4 @@
-.delete-wrapper {
+/* .delete-wrapper {
   min-height: 100svh;
   width: 100%;
   position: fixed;
@@ -8,9 +8,10 @@
   z-index: 100;
   display: grid;
   place-items: center;
-}
+} */
 .delete-confirmation {
-  width: calc(100% - 2rem);
+  width: 91%;
+  min-width: 345px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -55,4 +56,9 @@
 .visible-dialog {
   visibility: visible;
   opacity: 1;
+}
+@media (width >= 769px) {
+  .delete-confirmation {
+    width: 27.7%;
+  }
 }

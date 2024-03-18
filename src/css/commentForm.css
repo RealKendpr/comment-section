@@ -1,8 +1,9 @@
 .user-comment-input {
   position: fixed;
   bottom: 32px;
-  left: 16px;
-  right: 16px;
+  width: 91%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .user-comment-input form {
@@ -21,5 +22,10 @@
   }
   & button {
     grid-area: button;
+  }
+}
+@media (width >= 1025px) {
+  .user-comment-input {
+    width: 51.8%;
   }
 }
