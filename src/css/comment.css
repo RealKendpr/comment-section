@@ -82,7 +82,7 @@
   grid-area: comment-operation;
   display: flex;
   column-gap: 16px;
-  overflow: scroll;
+  overflow-x: auto;
 
   & button {
     color: var(--primary-default);
