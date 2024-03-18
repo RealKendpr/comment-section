@@ -2,8 +2,21 @@
   margin: 32px auto;
   width: 91%;
 }
+.comment-list,
+.reply-list {
+  & > div {
+    display: grid;
+    gap: 16px;
+  }
+  & > div:not(:last-child) {
+    margin-bottom: 16px;
+  }
+}
 .comment-wrapper {
-  margin-bottom: 16px;
+  display: grid;
+  row-gap: 8px;
+}
+.comment {
   display: grid;
   row-gap: 20px;
   grid-template-rows: 1fr;
@@ -13,7 +26,7 @@
     "comment comment"
     "scores comment-operation";
 }
-.comment {
+.comment-content {
   grid-area: comment;
 
   & > p {
@@ -35,9 +48,8 @@
     color: var(--neutral-400);
   }
 }
-
 .comment-section {
-  padding-bottom: 200px;
+  margin-bottom: 32px;
 }
 .scores {
   grid-area: scores;
@@ -74,9 +86,6 @@
     font-family: var(--font-family);
   }
 }
-/* .reply-list {
-  margin-left: 16px;
-} */
 .reply-list-wrapper {
   display: grid;
   grid-template-columns: 4.8% 1fr;
@@ -90,11 +99,13 @@
 }
 
 @media (width >= 1025px) {
+  .comment-section {
+    margin-bottom: 64px;
+  }
   .comment-list {
-    margin: 64px auto;
     width: 51.8%;
   }
-  .comment-wrapper {
+  .comment {
     column-gap: 22px;
     grid-template-rows: 1fr;
     grid-template-columns: auto 1fr auto;
@@ -136,7 +147,7 @@
       content: "";
       display: block;
       width: 2px;
-      height: calc(100% - 16px);
+      height: 100%;
       background-color: var(--neutral-300);
     }
   }

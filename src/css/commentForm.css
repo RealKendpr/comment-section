@@ -1,9 +1,10 @@
 .user-comment-input {
-  position: fixed;
+  position: sticky;
   bottom: 32px;
   width: 91%;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-inline: auto;
+  /* left: 50%;
+  transform: translateX(-50%); */
 }
 
 .user-comment-input form {

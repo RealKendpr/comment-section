@@ -30,81 +30,86 @@ export function Comments() {
               <commentValueContext.Provider
                 value={{ commentValue, setCommentValue }}
               >
-                <div className="card comment-wrapper">
-                  <div className="comment-info">
-                    <div className="img-wrapper">
-                      <img src={user.image.png} alt="" />
-                    </div>
-                    <div className="username">
-                      <a href="#">{user.username}</a>
-                      {user.username === currentUser.username && (
-                        <span>you</span>
+                <div className="comment-wrapper">
+                  <div className="card comment">
+                    <div className="comment-info">
+                      <div className="img-wrapper">
+                        <img src={user.image.png} alt="" />
+                      </div>
+                      <div className="username">
+                        <a href="#">{user.username}</a>
+                        {user.username === currentUser.username && (
+                          <span>you</span>
+                        )}
+                      </div>
+                      {createdAt.includes("ago") ? (
+                        <time>{createdAt}</time>
+                      ) : (
+                        <TimeAgo
+                          date={createdAt}
+                          live={false}
+                          suffix="ago"
+                        ></TimeAgo>
                       )}
                     </div>
-                    {createdAt.includes("ago") ? (
-                      <time>{createdAt}</time>
-                    ) : (
-                      <TimeAgo
-                        date={createdAt}
-                        live={false}
-                        suffix="ago"
-                      ></TimeAgo>
-                    )}
+                    <article key={id} className="comment-content">
+                      {openForm.commentId === id &&
+                      openForm.type === "EditForm" ? (
+                        <EditForms
+                          content={content}
+                          type="EditForm"
+                        ></EditForms>
+                      ) : (
+                        <p>{content}</p>
+                      )}
+                    </article>
+                    <Scores
+                      score={comment.score}
+                      commentId={id}
+                      username={user.username}
+                    ></Scores>
+                    <div className="comment-operations">
+                      {user.username === currentUser.username && (
+                        // <div className="user-operations">
+                        <>
+                          <Delete username={user.username}></Delete>
+                          {openForm.commentId === id ? null : (
+                            <Button
+                              clickAction={() => {
+                                setCommentValue(content);
+                                setOPenForm({
+                                  commentId: id,
+                                  type: "EditForm",
+                                });
+                              }}
+                              value="Edit"
+                            ></Button>
+                          )}
+                        </>
+                        // </div>
+                      )}
+                      {user.username ===
+                      currentUser.username ? null : openForm.commentId ===
+                        id ? null : (
+                        <Button
+                          clickAction={() =>
+                            setOPenForm({
+                              commentId: id,
+                              type: "ReplyToComment",
+                            })
+                          }
+                          value="Reply"
+                        ></Button>
+                      )}
+                    </div>
                   </div>
-                  <article key={id} className="comment">
-                    {openForm.commentId === id &&
-                    openForm.type === "EditForm" ? (
-                      <EditForms content={content} type="EditForm"></EditForms>
-                    ) : (
-                      <p>{content}</p>
-                    )}
-                  </article>
-                  <Scores
-                    score={comment.score}
-                    commentId={id}
-                    username={user.username}
-                  ></Scores>
-                  <div className="comment-operations">
-                    {user.username === currentUser.username && (
-                      // <div className="user-operations">
-                      <>
-                        <Delete username={user.username}></Delete>
-                        {openForm.commentId === id ? null : (
-                          <Button
-                            clickAction={() => {
-                              setCommentValue(content);
-                              setOPenForm({
-                                commentId: id,
-                                type: "EditForm",
-                              });
-                            }}
-                            value="Edit"
-                          ></Button>
-                        )}
-                      </>
-                      // </div>
-                    )}
-                    {user.username ===
-                    currentUser.username ? null : openForm.commentId ===
-                      id ? null : (
-                      <Button
-                        clickAction={() =>
-                          setOPenForm({
-                            commentId: id,
-                            type: "ReplyToComment",
-                          })
-                        }
-                        value="Reply"
-                      ></Button>
-                    )}
-                  </div>
+                  {user.username !== currentUser.username && (
+                    <InputForm
+                      commentUsername={user.username}
+                      type="ReplyToComment"
+                    ></InputForm>
+                  )}
                 </div>
-                {user.username !== currentUser.username && (
-                  <InputForm
-                    commentUsername={user.username}
-                    type="ReplyToComment"
-                  ></InputForm>
-                )}
                 <Replies currentUser={currentUser} replies={replies}></Replies>
               </commentValueContext.Provider>
             </CommentIdContext.Provider>

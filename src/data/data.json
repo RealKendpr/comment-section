@@ -63,34 +63,6 @@
           }
         }
       ]
-    },
-    {
-      "id": 6,
-      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui vel quo itaque quia? Nostrum, iusto.",
-      "createdAt": "1 month ago",
-      "score": 12,
-      "user": {
-        "image": {
-          "png": "./assets/images//avatars/image-maxblagun.png",
-          "webp": "./assets/images//avatars/image-maxblagun.webp"
-        },
-        "username": "hdjdj"
-      },
-      "replies": []
-    },
-    {
-      "id": 7,
-      "content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui reprehenderit nesciunt amet ipsam. Fugit eos, molestias facilis dolore dolorum a quos delectus quis soluta, vel molestiae? Voluptates amet quis a.",
-      "createdAt": "2 days ago",
-      "score": 2,
-      "user": {
-        "image": {
-          "png": "./assets/images//avatars/image-juliusomo.png",
-          "webp": "./assets/images//avatars/image-juliusomo.webp"
-        },
-        "username": "juliusomo"
-      },
-      "replies": []
     }
   ]
 }

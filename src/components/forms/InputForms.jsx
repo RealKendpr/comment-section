@@ -108,7 +108,7 @@ export function InputForm({ commentUsername, replyId, type }) {
             }
             id="ReplyToReply"
           >
-            <div>
+            <div className="img-wrapper">
               <img src={currentUser.image.png} alt="" />
             </div>
             <form onSubmit={submitForm}>

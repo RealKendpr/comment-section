@@ -1,5 +1,4 @@
 .reply-form {
-  margin-bottom: 16px;
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 16px;
