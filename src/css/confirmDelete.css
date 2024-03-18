@@ -42,10 +42,16 @@
     padding-inline: 23px !important;
   }
   & .grey-btn {
-    background: var(--neutral-400);
+    background: var(--neutral-900);
+    &:hover {
+      background: var(--neutral-400);
+    }
   }
   & .red-btn {
     background: var(--primary-red);
+    &:hover {
+      background: var(--red-hover);
+    }
   }
 }
 .hidden-dialog {

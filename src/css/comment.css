@@ -72,6 +72,10 @@
   & button {
     height: calc((14px * 2) + 11px);
     padding: 14px;
+
+    &:hover svg {
+      fill: var(--primary-default);
+    }
   }
 }
 .comment-operations {

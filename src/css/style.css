@@ -17,17 +17,36 @@ strong {
   font-size: var(--body-font-size);
   font-weight: var(--bold-wght);
   font-family: var(--font-family);
+
+  &:hover {
+    background: var(--default-hover);
+  }
 }
 .mini-btn {
   display: flex;
   align-items: center;
 
-  & img {
+  & svg {
     margin-right: 8px;
+  }
+
+  &:hover {
+    color: var(--default-hover);
+
+    & svg {
+      fill: var(--default-hover);
+    }
   }
 }
 .delete-btn {
   color: var(--primary-red) !important;
+  &:hover {
+    color: var(--red-hover) !important;
+
+    & svg {
+      fill: var(--red-hover) !important;
+    }
+  }
 }
 form {
   & textarea {
@@ -68,6 +87,10 @@ form {
     font-weight: var(--semibold-wght);
     font-family: var(--font-family);
     color: var(--neutral-900);
+
+    &:hover {
+      color: var(--neutral-400);
+    }
   }
 
   & span {
