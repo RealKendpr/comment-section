@@ -42,15 +42,23 @@ export function Comments() {
                           <span>you</span>
                         )}
                       </div>
-                      {createdAt.includes("ago") ? (
-                        <time>{createdAt}</time>
-                      ) : (
-                        <TimeAgo
-                          date={createdAt}
-                          live={false}
-                          suffix="ago"
-                        ></TimeAgo>
-                      )}
+                      <div
+                        className={
+                          user.username === currentUser.username
+                            ? "small-date"
+                            : null
+                        }
+                      >
+                        {createdAt.includes("ago") ? (
+                          <time>{createdAt}</time>
+                        ) : (
+                          <TimeAgo
+                            date={createdAt}
+                            live={false}
+                            suffix="ago"
+                          ></TimeAgo>
+                        )}
+                      </div>
                     </div>
                     <article key={id} className="comment-content">
                       {openForm.commentId === id &&

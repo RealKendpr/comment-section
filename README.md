@@ -57,8 +57,6 @@ I learned about so many things about react
 - React hooks and states
 -  -->
 
-s
-
 ### Continued development
 
 I want to learn more about React itself and the how to use reusable components more effectively, and how to also use global/reusable functions across any components. The naming conventions of my components and classes of different elements also need some improvements.
@@ -71,7 +69,7 @@ I also want to learn more about fetching data from a server.
 
 ## Author
 
-- Website - [RealKendpr](https://RealKendpr.github.io/comment-section)
+- Website - [RealKendpr](https://realkendpr.github.io/kendpr-md/)
 - Frontend Mentor - [@RealKendpr](https://www.frontendmentor.io/profile/RealKendpr)
 
 <!-- ## Acknowledgments -->

@@ -21,6 +21,9 @@ strong {
   &:hover {
     background: var(--default-hover);
   }
+  &:disabled {
+    background: var(--default-hover);
+  }
 }
 .mini-btn {
   display: flex;
@@ -108,7 +111,7 @@ dialog {
   border: 0;
 }
 dialog::backdrop {
-  background: var(--neutral-900);
+  background-color: var(--neutral-900);
   opacity: 0.5;
 }
 button:hover {
@@ -125,7 +128,7 @@ button:hover {
   font-size: 0;
   overflow: hidden;
 }
-@media (width >= 769px) {
+@media (width >= 600px) {
   .card {
     padding: 22px;
   }
